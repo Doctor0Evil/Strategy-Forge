@@ -1,0 +1,237 @@
+</aln-playbook>
+;;
+;; FILE: universal-aananoswarm.aln
+;; TYPE: ALN Workflow Module
+;; DESC: Universal nanoswarm workflow for repo health, compliance, and
+;;       autonomous auditing across virtual and web environments.
+;; COMPLIANCE: Bit.Hub, Perplexity.Labs, LegalBanannas
+;;
+
+<aln-playbook
+  version="Universal.AANanoSwarm.v1.0"
+  security="ALN-STRICT"
+  exec-policy="content-execution"
+  evolution="persistent"
+  authorizer="Bit.Hub.Governance.Core"
+>
+
+  ;; ////////////////////////////////////////////////////////////////////////////
+  ;; MODULE 001: UNIVERSAL AANANOSWARM WORKFLOW
+  ;; ////////////////////////////////////////////////////////////////////////////
+
+  <module id="Universal.AANanoSwarm.Workflow">
+
+    <define type="Workflow" name="Universal.AANanoSwarm" scope="public">
+      <params>
+        <param name="sourceFile" type="String" default="paste.txt" />
+      </params>
+
+      <logic>
+
+        ;; --- Scope & environment bootstrap ------------------------------------
+        <call function="ALN.Scope.LoadDefinitions"
+              params="['Scope-Definitions.aln','universal','true']" />
+
+        <struct name="RuntimeContext">
+          <field name="agent"         value="'.aananoswarm'" />
+          <field name="mode"          value="'universal'" />
+          <field name="scope"         value="'all'" />
+          <field name="safe"          value="true" />
+          <field name="compliant"     value="['Bit.Hub','Perplexity.Labs','LegalBanannas']" />
+          <field name="iteration"     value="'continuous'" />
+          <field name="environments"  value="['virtual','web']" />
+          <field name="containment"   value="'swarmnet-strict'" />
+          <field name="source"        value="sourceFile" />
+        </struct>
+
+        ;; --- Legal & privacy compliance gate ----------------------------------
+        <call function="LegalBanannas.Compliance.Evaluate"
+              params="['legal:compliance_check',
+                      'privacy:gdpr_ccpa',
+                      'audit:log_all',
+                      'role:verify_user',
+                      'target:not_protected_group']" />
+
+        ;; --- Repo health / RAG / blockchain anchoring workflow ----------------
+        <call function="Universal.AANanoSwarm.RepoHealthPipeline"
+              params="[RuntimeContext]" />
+
+        ;; --- Optional interactive quiz construct -------------------------------
+        <call function="Universal.AANanoSwarm.QuizConstruct"
+              params="['Alliance Legal Compliance & Signal Integrity',
+                      20,
+                      'infographic-research']" />
+
+      </logic>
+    </define>
+
+  </module>
+
+
+  ;; ////////////////////////////////////////////////////////////////////////////
+  ;; MODULE 002: REPO HEALTH / RAG / PERMISSION PIPELINE
+  ;; ////////////////////////////////////////////////////////////////////////////
+
+  <module id="Universal.AANanoSwarm.RepoHealth">
+
+    <define type="Function" name="RepoHealthPipeline" scope="public">
+      <params>
+        <param name="ctx" type="Struct" />
+      </params>
+      <logic>
+
+        ;; Declare toolchain actions
+        <struct name="PipelineActions">
+          <field name="audit"                 value="true" />
+          <field name="chain_revert"          value="true" />
+          <field name="enable_rag_logging"    value="true" />
+          <field name="aln_tool_restructure"  value="true" />
+          <field name="distribute_permission" value="true" />
+          <field name="anchor_blockchain"     value="true" />
+          <field name="safety_resistance"     value="'max'" />
+          <field name="safe_iterations"       value="12" />
+        </struct>
+
+        ;; Attach bit_bot agent descriptor
+        <struct name="BitBot">
+          <field name="link"        value="'repo-health-checker'" />
+          <field name="description" value="'Continuous repo audit, fault revert, RAG logging, tool restructuring, permission distribution, blockchain anchoring.'" />
+        </struct>
+
+        ;; Execute health check workflow under swarmnet-strict containment
+        <call function="Bit.Hub.Workflow.Execute"
+              params="['repo-health-checker.fet',
+                      PipelineActions,
+                      BitBot,
+                      ctx.environments,
+                      ctx.containment]" />
+
+      </logic>
+    </define>
+
+  </module>
+
+
+  ;; ////////////////////////////////////////////////////////////////////////////
+  ;; MODULE 003: POLICY LAYER (SECURITY & SAFETY)
+  ;; ////////////////////////////////////////////////////////////////////////////
+
+  <module id="Universal.AANanoSwarm.PolicyLayer">
+
+    <define type="Struct" name="PolicyLayer.ShutitDwnOmega" scope="public">
+      <field name="policy"                       value="'shutitdwn-Ω'" />
+      <field name="clearance"                   value="'Ω-GODMODE'" />
+      <field name="scan_depth"                  value="'quantum'" />
+      <field name="virtanet"                    value="'enable_autonomous_node_orchestration'" />
+      <field name="auditlog"                    value="['immutable','tamper_evident']" />
+      <field name="compliance_trigger"          value="'auto'" />
+      <field name="ai_agent_hook"               value="['read_only','sandboxed','safe']" />
+      <field name="signal_isolation"            value="['optical_isolator','air_gap','galvanic_barrier']" />
+      <field name="device_exclusion"            value="['ban_neural_interface','ban_non_compliant_ai','require_validation']" />
+      <field name="workflow"                    value="['runtime_oversight','firewall_dev_layer','cryptosign_modules']" />
+      <field name="prohibited_value"            value="['block','enforce']" />
+      <field name="catastrophic_loop_mitigation"value="['on_detect','safe_deactivation']" />
+      <field name="human_in_the_loop"           value="['audit_multi_party','signoff_crypto','escalate_halt']" />
+      <field name="legal_framework"             value="['standard','medical','privacy']" />
+      <field name="hardware_failsafe"           value="['deadman_switch_active','bci_signal_ban']" />
+      <field name="neuro_symbolic_control"      value="['only_explainable','rule_constrained','mapped_outputs']" />
+      <field name="system_export"               value="['format','sign','notarize_blockchain']" />
+      <field name="bci_superban"                value="['active','block_interference','quarantine_bci']" />
+      <field name="metaphysical_safety"         value="['lockdown_on_collapse','enforce_forensic_apportionment']" />
+      <field name="policy_gate"                 value="['opa_bithub_enabled','spdx_scan']" />
+      <field name="compliancebot"               value="['monitor','instant_quarantine_on_anomaly']" />
+      <field name="quantumdatarouter"           value="['route_sanitize','block_legacy_protocols']" />
+    </define>
+
+    <define type="Function" name="ApplyPolicy" scope="public">
+      <params>
+        <param name="ctx" type="Struct" />
+      </params>
+      <logic>
+        <let var="policy" value="PolicyLayer.ShutitDwnOmega" />
+        <call function="Bit.Hub.Policy.Apply"
+              params="[policy, ctx]" />
+      </logic>
+    </define>
+
+  </module>
+
+
+  ;; ////////////////////////////////////////////////////////////////////////////
+  ;; MODULE 004: .ZETA COMPLIANCE WRAPPER
+  ;; ////////////////////////////////////////////////////////////////////////////
+
+  <module id="Universal.AANanoSwarm.ZetaCompliance">
+
+    <define type="Struct" name="Zeta.Compliance.Config" scope="public">
+      <field name="git_sync_root" value="'Doctor0Evil/.comet'" />
+      <field name="branch"        value="'main'" />
+      <field name="auth_env_var"  value="'GITHUB_TOKEN'" />
+      <field name="python"        value="'3.8'" />
+      <field name="pip_upgrade"   value="true" />
+      <field name="tool"          value="'pylint'" />
+      <field name="safe_dir"      value="true" />
+    </define>
+
+    <define type="Function" name="RunCompliancePipeline" scope="public">
+      <logic>
+        <call function="ALN.Code.Compliance.Run"
+              params="[Zeta.Compliance.Config]" />
+      </logic>
+    </define>
+
+    <define type="Function" name="SafeEventHandler" scope="public">
+      <params>
+        <param name="event" type="Object" />
+      </params>
+      <logic>
+        <try>
+          <call function="Swarm.Event.AgentHandler" params="[event]" />
+        </try>
+        <catch error="TimeoutError">
+          <call function="Swarm.Safety.PartialResultContain"
+                params="[event]" />
+        </catch>
+        <call function="FetchAI.Autonomy.EnforceSandboxedSecure"
+              params="[]" />
+      </logic>
+    </define>
+
+  </module>
+
+
+  ;; ////////////////////////////////////////////////////////////////////////////
+  ;; MODULE 005: AANANOSWARM QUIZ CONSTRUCT
+  ;; ////////////////////////////////////////////////////////////////////////////
+
+  <module id="Universal.AANanoSwarm.Quiz">
+
+    <define type="Function" name="QuizConstruct" scope="public">
+      <params>
+        <param name="topic" type="String" />
+        <param name="questionCount" type="Int" />
+        <param name="style" type="String" />
+      </params>
+      <logic>
+        <let var="policy" value="PolicyLayer.ShutitDwnOmega" />
+        <struct name="QuizConfig">
+          <field name="mode"            value="'quiz'" />
+          <field name="topic"           value="topic" />
+          <field name="questions"       value="questionCount" />
+          <field name="style"           value="style" />
+          <field name="return_embed"    value="true" />
+          <field name="policy_bundle"   value="policy" />
+        </struct>
+
+        <call function="Bit.Hub.Quiz.Render"
+              params="[QuizConfig, '/compliance_workflow/visual_embed']" />
+      </logic>
+    </define>
+
+  </module>
+
+;;
+;; END OF MODULE: universal-aananoswarm.aln
+;;
+
+</aln-playbook>

@@ -1,0 +1,118 @@
+<!-- ALN Playbook Reference: The ALN Programming Cookbook, Chapter 7: Secure Environments -->
+<playbook
+    id="win13-secure-dev-shell-setup-v1"
+    agent="SwarmNet.Orchestrator"
+    description="A compliant playbook for provisioning a secure win13.cloud development shell with a virtual-web interface. This playbook explicitly denies all non-local remote access and enforces strict compliance checks on all loaded scripts."
+>
+    <parameters>
+        <param name="environment_name" default="win13-dev-sandbox" />
+        <param name="base_image" default="win13.cloud-secure-v2.1" />
+        <param name="compliance_log" default="/var/log/swarmnet/compliance.log" />
+    </parameters>
+
+    <job id="provision_and_secure_environment">
+        <description>Provisions the virtual machine and applies a Zeta-Firewall to block all external remote access, creating a secure shell.</description>
+
+        <step 
+            name="provision_vm"
+            run="cloud.vm.create(name=params.environment_name, image=params.base_image)"
+            description="Creates a new virtual machine using the latest hardened Win13.cloud image."
+        />
+
+        <step
+            name="apply_zeta_firewall_lockdown"
+            run="firewall.zeta.apply_rule(
+                target=params.environment_name,
+                rule='DENY(source.ip != local && connection.type == remote_shell)',
+                priority='critical'
+            )"
+            description="Applies a non-overridable firewall rule that denies all remote shell access attempts originating from outside the local VIRTANET."
+        />
+
+        <step
+            name="install_nanowall_agent"
+            run="nanowall.install(target=params.environment_name)"
+            description="Installs the Nanowall agent for process-level isolation and monitoring within the shell."
+        />
+    </job>
+
+    <job id="deploy_virtual_web_interface" dependsOn="provision_and_secure_environment">
+        <description>Deploys the aa-nanoswarm web component as a virtual interface for development, enforcing strict script compliance.</description>
+
+        <step
+            name="deploy_nanoswarm_component"
+            run="swarm.web.deploy_component(
+                target=params.environment_name,
+                component_definition=`
+                    <aa-nanoswarm metabit='comet-chat-compliance'>
+                      <alm-cometChat 
+                        data-session='[traceid]' 
+                        icon='comet.ai-logo' 
+                        status='compliant' 
+                        aria-label='Safe Prompt Interface'></alm-cometChat>
+                      <script type='application/json' id='nanoswarm-cfg'>
+                        {
+                          'systemjs': {
+                            'meta': {
+                              'web-audio-polyfill.js': {'scriptLoad': true, 'complianceAudit': true},
+                              'dist/7zz.js': {'scriptLoad': true, 'complianceAudit': true}
+                            },
+                            'dynamic': [
+                              {
+                                'name': 'three',
+                                'requireCheck': 'window.checkCompliance(\'three\')',
+                                'blockOnFail': 'Compliance halt (three.js)',
+                                'moduleExport': 'window.THREE'
+                              }
+                            ],
+                            'bootstrap': {
+                              'condition': 'browserSupported && window.complianceAuditReady()',
+                              'sequence': 'SystemJS.import(\'main\');',
+                              'onFail': 'window.logComplianceBlock(\'Browser/platform/access failed compliance.\');'
+                            }
+                          }
+                        }
+                      <\/script>
+                    </aa-nanoswarm>
+                `
+            )"
+            description="Deploys the core HTML and JSON configuration for the virtual interface."
+        />
+
+        <step
+            name="verify_script_compliance"
+            run="nanowall.verify_scripts(
+                target=params.environment_name,
+                config_id='nanoswarm-cfg',
+                log_target=params.compliance_log
+            )"
+            description="Uses the Nanowall agent to audit all dynamically loaded scripts against the embedded compliance rules."
+        />
+    </job>
+
+    <job id="final_verification" dependsOn="deploy_virtual_web_interface">
+        <description>Performs a final check to confirm that the environment is secure and ready for use.</description>
+        
+        <step
+            name="confirm_remote_access_blocked"
+            run="swarm.net.test_connection(
+                source='external.sentinel.node',
+                target=params.environment_name,
+                port='3389',
+                expected='CONNECTION_REFUSED'
+            )"
+            description="Confirms that the Zeta-Firewall rule is active and successfully blocking external remote desktop attempts."
+        />
+        
+        <step
+            name="log_successful_deployment"
+            run="audit.log(
+                event='SECURE_SHELL_CREATED',
+                environment=params.environment_name,
+                status='ACTIVE_AND_SECURE'
+            )"
+            description="Logs the successful and secure creation of the development environment to the main SwarmNet audit trail."
+        />
+    </job>
+
+</playbook>

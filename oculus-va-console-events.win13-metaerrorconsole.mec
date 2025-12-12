@@ -1,0 +1,159 @@
+Log Name:      Microsoft-Windows-Kernel-PnP/Configuration
+Source:        Microsoft-Windows-Kernel-PnP
+Date:          8/15/2022 2:30:10 AM
+Event ID:      410
+Task Category: None
+Level:         Information
+Keywords:      
+User:          SYSTEM
+Computer:      LivingRoom
+Description:
+Device SWD\MMDEVAPI\{0.0.0.00000000}.{3c435113-44fa-4eb5-b50d-290478ab4c6e} was started.
+
+Driver Name: audioendpoint.inf
+Class Guid: {c166523c-fe0c-4a94-a586-f1a80cfbbf3e}
+Service: 
+Lower Filters: 
+Upper Filters: 
+Event Xml:
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+  <System>
+    <Provider Name="Microsoft-Windows-Kernel-PnP" Guid="{9c205a39-1250-487d-abd7-e831c6290539}" />
+    <EventID>410</EventID>
+    <Version>0</Version>
+    <Level>4</Level>
+    <Task>0</Task>
+    <Opcode>0</Opcode>
+    <Keywords>0x4000000000000000</Keywords>
+    <TimeCreated SystemTime="2022-08-15T09:30:10.0675872Z" />
+    <EventRecordID>1055</EventRecordID>
+    <Correlation />
+    <Execution ProcessID="4" ThreadID="132" />
+    <Channel>Microsoft-Windows-Kernel-PnP/Configuration</Channel>
+    <Computer>LivingRoom</Computer>
+    <Security UserID="S-1-5-18" />
+  </System>
+  <EventData>
+    <Data Name="DeviceInstanceId">SWD\MMDEVAPI\{0.0.0.00000000}.{3c435113-44fa-4eb5-b50d-290478ab4c6e}</Data>
+    <Data Name="DriverName">audioendpoint.inf</Data>
+    <Data Name="ClassGuid">{c166523c-fe0c-4a94-a586-f1a80cfbbf3e}</Data>
+    <Data Name="ServiceName">
+    </Data>
+    <Data Name="LowerFilters">
+    </Data>
+    <Data Name="UpperFilters">
+    </Data>
+    <Data Name="Problem">0x0</Data>
+    <Data Name="Status">0x0</Data>
+  </EventData>
+</Event>
+
+- System 
+
+  - Provider 
+
+   [ Name]  Microsoft-Windows-Kernel-PnP 
+   [ Guid]  {9c205a39-1250-487d-abd7-e831c6290539} 
+ 
+   EventID 400 
+ 
+   Version 0 
+ 
+   Level 4 
+ 
+   Task 0 
+ 
+   Opcode 0 
+ 
+   Keywords 0x4000000000000000 
+ 
+  - TimeCreated 
+
+   [ SystemTime]  2022-08-15T09:30:10.0658609Z 
+ 
+   EventRecordID 1054 
+ 
+   Correlation 
+ 
+  - Execution 
+
+   [ ProcessID]  4 
+   [ ThreadID]  132 
+ 
+   Channel Microsoft-Windows-Kernel-PnP/Configuration 
+ 
+   Computer LivingRoom 
+ 
+  - Security 
+
+   [ UserID]  S-1-5-18 
+ 
+
+- EventData 
+
+  DeviceInstanceId SWD\MMDEVAPI\{0.0.0.00000000}.{3c435113-44fa-4eb5-b50d-290478ab4c6e} 
+  DriverName audioendpoint.inf 
+  ClassGuid {c166523c-fe0c-4a94-a586-f1a80cfbbf3e} 
+  DriverDate 12/06/2019 
+  DriverVersion 10.0.19041.1 
+  DriverProvider Microsoft 
+  DriverInbox true 
+  DriverSection NO_DRV 
+  DriverRank 0xff0000 
+  MatchingDeviceId MMDEVAPI\AudioEndpoints 
+  OutrankedDrivers c_swdevice.inf:SWD\GenericRaw:00FF3001 
+  DeviceUpdated false 
+  Status 0x0 
+  ParentDeviceInstanceId ROOT\MEDIA\0000 
+
+- System 
+
+  - Provider 
+
+   [ Name]  Microsoft-Windows-Kernel-PnP 
+   [ Guid]  {9c205a39-1250-487d-abd7-e831c6290539} 
+ 
+   EventID 442 
+ 
+   Version 0 
+ 
+   Level 3 
+ 
+   Task 0 
+ 
+   Opcode 0 
+ 
+   Keywords 0x4000000000000000 
+ 
+  - TimeCreated 
+
+   [ SystemTime]  2022-08-15T09:30:10.0633306Z 
+ 
+   EventRecordID 1053 
+ 
+   Correlation 
+ 
+  - Execution 
+
+   [ ProcessID]  4 
+   [ ThreadID]  132 
+ 
+   Channel Microsoft-Windows-Kernel-PnP/Configuration 
+ 
+   Computer LivingRoom 
+ 
+  - Security 
+
+   [ UserID]  S-1-5-18 
+ 
+
+- EventData 
+
+  DeviceInstanceId SWD\MMDEVAPI\{0.0.0.00000000}.{3c435113-44fa-4eb5-b50d-290478ab4c6e} 
+  LastDeviceInstanceId SWD\MMDEVAPI\{0.0.0.00000000}.{17728344-3ee6-40ec-97b0-7289711f33bb} 
+  ClassGuid {c166523c-fe0c-4a94-a586-f1a80cfbbf3e} 
+  LocationPath  
+  MigrationRank 0xf00000000000f120 
+  Present false 
+  Status 0xc0000719 
+

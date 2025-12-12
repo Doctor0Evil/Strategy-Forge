@@ -1,0 +1,3355 @@
+accessKey
+: 
+""
+attributeStyleMap
+: 
+StylePropertyMap {size: 0}
+attributes
+: 
+NamedNodeMap {0: define, 1: src, 2: mode, 3: scope, 4: safe, 5: compliant, 6: iteration, define: define, src: src, mode: mode, scope: scope, safe: safe, …}
+autocapitalize
+: 
+""
+autofocus
+: 
+false
+baseURI
+: 
+"chrome-error://chromewebdata/"
+childElementCount
+: 
+0
+childNodes
+: 
+NodeList []
+children
+: 
+HTMLCollection []
+classList
+: 
+DOMTokenList [value: '']
+className
+: 
+""
+clientHeight
+: 
+0
+clientLeft
+: 
+0
+clientTop
+: 
+0
+clientWidth
+: 
+0
+computedName
+: 
+""
+computedRole
+: 
+"generic"
+containerTiming
+: 
+""
+containerTimingIgnore
+: 
+false
+contentEditable
+: 
+"inherit"
+currentCSSZoom
+: 
+1
+dataset
+: 
+DOMStringMap {}
+dir
+: 
+""
+draggable
+: 
+false
+elementTiming
+: 
+""
+enterKeyHint
+: 
+""
+focusgroup
+: 
+""
+headingOffset
+: 
+0
+headingReset
+: 
+false
+hidden
+: 
+false
+id
+: 
+""
+inert
+: 
+false
+innerHTML
+: 
+""
+innerText
+: 
+""
+inputMode
+: 
+""
+isConnected
+: 
+true
+isContentEditable
+: 
+false
+lang
+: 
+""
+localName
+: 
+"aananoswarm"
+namespaceURI
+: 
+"http://www.w3.org/1999/xhtml"
+nodeName
+: 
+"AANANOSWARM"
+nodeType
+: 
+1
+nonce
+: 
+""
+offsetHeight
+: 
+0
+offsetLeft
+: 
+0
+offsetTop
+: 
+0
+offsetWidth
+: 
+0
+outerHTML
+: 
+"<aananoswarm define=\"auto\" src=\"paste.txt\" mode=\"universal\" scope=\"all\" safe=\"true\" compliant=\"Bit.Hub,Perplexity.Labs,LegalBanannas\" iteration=\"continuous\"></aananoswarm>"
+outerText
+: 
+""
+ownerDocument
+: 
+document
+location
+: 
+Location
+ancestorOrigins
+: 
+DOMStringList
+0
+: 
+"https://www.youtube.com"
+length
+: 
+1
+[[Prototype]]
+: 
+DOMStringList
+contains
+: 
+ƒ contains()
+length
+: 
+1
+name
+: 
+"contains"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at contains.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at contains.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at contains.invokeGetter (<anonymous>:3:28)]
+bind
+: 
+ƒ bind()
+length
+: 
+1
+name
+: 
+"bind"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+call
+: 
+ƒ call()
+length
+: 
+1
+name
+: 
+"call"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at call.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at call.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at call.invokeGetter (<anonymous>:3:28)]
+bind
+: 
+ƒ bind()
+length
+: 
+1
+name
+: 
+"bind"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+bind
+: 
+ƒ bind()
+length
+: 
+1
+name
+: 
+"bind"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+arguments
+: 
+(...)
+bind
+: 
+ƒ bind()
+call
+: 
+ƒ call()
+caller
+: 
+(...)
+constructor
+: 
+ƒ Function()
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+get arguments
+: 
+ƒ arguments()
+set arguments
+: 
+ƒ arguments()
+get caller
+: 
+ƒ caller()
+set caller
+: 
+ƒ caller()
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+[[Scopes]]
+: 
+Scopes[0]
+[[Scopes]]
+: 
+Scopes[0]
+call
+: 
+ƒ call()
+length
+: 
+1
+name
+: 
+"call"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at call.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at call.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at call.invokeGetter (<anonymous>:3:28)]
+bind
+: 
+ƒ bind()
+length
+: 
+1
+name
+: 
+"bind"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+length
+: 
+2
+name
+: 
+"apply"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at apply.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at apply.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+length
+: 
+2
+name
+: 
+"apply"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at apply.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at apply.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+arguments
+: 
+(...)
+bind
+: 
+ƒ bind()
+call
+: 
+ƒ call()
+caller
+: 
+(...)
+constructor
+: 
+ƒ Function()
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+length
+: 
+1
+name
+: 
+"[Symbol.hasInstance]"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at [Symbol.hasInstance].invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at [Symbol.hasInstance].invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at [Symbol.hasInstance].invokeGetter (<anonymous>:3:28)]
+bind
+: 
+ƒ bind()
+length
+: 
+1
+name
+: 
+"bind"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+bind
+: 
+ƒ bind()
+length
+: 
+1
+name
+: 
+"bind"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+arguments
+: 
+(...)
+bind
+: 
+ƒ bind()
+call
+: 
+ƒ call()
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+constructor
+: 
+ƒ Function()
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+get arguments
+: 
+ƒ arguments()
+set arguments
+: 
+ƒ arguments()
+get caller
+: 
+ƒ caller()
+set caller
+: 
+ƒ caller()
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+[[Scopes]]
+: 
+Scopes[0]
+[[Scopes]]
+: 
+Scopes[0]
+No properties
+call
+: 
+ƒ call()
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+constructor
+: 
+ƒ Function()
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+get arguments
+: 
+ƒ arguments()
+set arguments
+: 
+ƒ arguments()
+get caller
+: 
+ƒ caller()
+set caller
+: 
+ƒ caller()
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+[[Scopes]]
+: 
+Scopes[0]
+[[Scopes]]
+: 
+Scopes[0]
+call
+: 
+ƒ call()
+length
+: 
+1
+name
+: 
+"call"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at call.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at call.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at call.invokeGetter (<anonymous>:3:28)]
+bind
+: 
+ƒ bind()
+length
+: 
+1
+name
+: 
+"bind"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+arguments
+: 
+(...)
+bind
+: 
+ƒ bind()
+call
+: 
+ƒ call()
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+constructor
+: 
+ƒ Function()
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+get arguments
+: 
+ƒ arguments()
+set arguments
+: 
+ƒ arguments()
+get caller
+: 
+ƒ caller()
+length
+: 
+0
+name
+: 
+"get caller"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at get caller.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at get caller.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+set caller
+: 
+ƒ caller()
+length
+: 
+1
+name
+: 
+"set caller"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at set caller.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at set caller.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+constructor
+: 
+ƒ Object()
+hasOwnProperty
+: 
+ƒ hasOwnProperty()
+isPrototypeOf
+: 
+ƒ isPrototypeOf()
+propertyIsEnumerable
+: 
+ƒ propertyIsEnumerable()
+toLocaleString
+: 
+ƒ toLocaleString()
+toString
+: 
+ƒ toString()
+length
+: 
+0
+name
+: 
+"toString"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at toString.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at toString.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+arguments
+: 
+(...)
+bind
+: 
+ƒ bind()
+length
+: 
+1
+name
+: 
+"bind"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+call
+: 
+ƒ call()
+length
+: 
+1
+name
+: 
+"call"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at call.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at call.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at toString.invokeGetter (<anonymous>:3:28)]
+constructor
+: 
+ƒ Function()
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+get arguments
+: 
+ƒ arguments()
+set arguments
+: 
+ƒ arguments()
+get caller
+: 
+ƒ caller()
+set caller
+: 
+ƒ caller()
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+[[Scopes]]
+: 
+Scopes[0]
+[[Scopes]]
+: 
+Scopes[0]
+valueOf
+: 
+ƒ valueOf()
+__defineGetter__
+: 
+ƒ __defineGetter__()
+__defineSetter__
+: 
+ƒ __defineSetter__()
+__lookupGetter__
+: 
+ƒ __lookupGetter__()
+__lookupSetter__
+: 
+ƒ __lookupSetter__()
+__proto__
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at Function.invokeGetter (<anonymous>:3:28)]
+bind
+: 
+ƒ bind()
+call
+: 
+ƒ call()
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at Function.invokeGetter (<anonymous>:3:28)]
+constructor
+: 
+ƒ Function()
+length
+: 
+1
+name
+: 
+"Function"
+prototype
+: 
+ƒ ()
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+length
+: 
+0
+name
+: 
+"toString"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+get arguments
+: 
+ƒ arguments()
+set arguments
+: 
+ƒ arguments()
+get caller
+: 
+ƒ caller()
+set caller
+: 
+ƒ caller()
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+[[Scopes]]
+: 
+Scopes[0]
+get __proto__
+: 
+ƒ __proto__()
+length
+: 
+0
+name
+: 
+"get __proto__"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+set __proto__
+: 
+ƒ __proto__()
+length
+: 
+1
+name
+: 
+"set __proto__"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+[[Scopes]]
+: 
+Scopes[0]
+[[Scopes]]
+: 
+Scopes[0]
+No properties
+call
+: 
+ƒ call()
+length
+: 
+1
+name
+: 
+"call"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at call.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at call.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at call.invokeGetter (<anonymous>:3:28)]
+constructor
+: 
+ƒ Function()
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+get arguments
+: 
+ƒ arguments()
+set arguments
+: 
+ƒ arguments()
+get caller
+: 
+ƒ caller()
+set caller
+: 
+ƒ caller()
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+constructor
+: 
+ƒ Object()
+assign
+: 
+ƒ assign()
+length
+: 
+2
+name
+: 
+"assign"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at assign.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at assign.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at assign.invokeGetter (<anonymous>:3:28)]
+bind
+: 
+ƒ bind()
+length
+: 
+1
+name
+: 
+"bind"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+bind
+: 
+ƒ bind()
+length
+: 
+1
+name
+: 
+"bind"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+bind
+: 
+ƒ bind()
+length
+: 
+1
+name
+: 
+"bind"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+length
+: 
+2
+name
+: 
+"apply"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at apply.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at apply.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+bind
+: 
+ƒ bind()
+length
+: 
+1
+name
+: 
+"bind"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+call
+: 
+ƒ call()
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+constructor
+: 
+ƒ Function()
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+length
+: 
+0
+name
+: 
+"toString"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at toString.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at toString.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at toString.invokeGetter (<anonymous>:3:28)]
+bind
+: 
+ƒ bind()
+length
+: 
+1
+name
+: 
+"bind"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+bind
+: 
+ƒ bind()
+call
+: 
+ƒ call()
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+constructor
+: 
+ƒ Function()
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+get arguments
+: 
+ƒ arguments()
+set arguments
+: 
+ƒ arguments()
+get caller
+: 
+ƒ caller()
+set caller
+: 
+ƒ caller()
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+[[Scopes]]
+: 
+Scopes[0]
+[[Scopes]]
+: 
+Scopes[0]
+call
+: 
+ƒ call()
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at toString.invokeGetter (<anonymous>:3:28)]
+constructor
+: 
+ƒ Function()
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+get arguments
+: 
+ƒ arguments()
+set arguments
+: 
+ƒ arguments()
+get caller
+: 
+ƒ caller()
+set caller
+: 
+ƒ caller()
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+[[Scopes]]
+: 
+Scopes[0]
+[[Scopes]]
+: 
+Scopes[0]
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+get arguments
+: 
+ƒ arguments()
+set arguments
+: 
+ƒ arguments()
+get caller
+: 
+ƒ caller()
+set caller
+: 
+ƒ caller()
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+[[Scopes]]
+: 
+Scopes[0]
+[[Scopes]]
+: 
+Scopes[0]
+call
+: 
+ƒ call()
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+constructor
+: 
+ƒ Function()
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+get arguments
+: 
+ƒ arguments()
+set arguments
+: 
+ƒ arguments()
+get caller
+: 
+ƒ caller()
+set caller
+: 
+ƒ caller()
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+[[Scopes]]
+: 
+Scopes[0]
+[[Scopes]]
+: 
+Scopes[0]
+call
+: 
+ƒ call()
+length
+: 
+1
+name
+: 
+"call"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+constructor
+: 
+ƒ Function()
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+get arguments
+: 
+ƒ arguments()
+set arguments
+: 
+ƒ arguments()
+get caller
+: 
+ƒ caller()
+set caller
+: 
+ƒ caller()
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+[[Scopes]]
+: 
+Scopes[0]
+[[Scopes]]
+: 
+Scopes[0]
+No properties
+call
+: 
+ƒ call()
+length
+: 
+1
+name
+: 
+"call"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at call.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at call.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at assign.invokeGetter (<anonymous>:3:28)]
+constructor
+: 
+ƒ Function()
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+get arguments
+: 
+ƒ arguments()
+set arguments
+: 
+ƒ arguments()
+get caller
+: 
+ƒ caller()
+set caller
+: 
+ƒ caller()
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+[[Scopes]]
+: 
+Scopes[0]
+[[Scopes]]
+: 
+Scopes[0]
+create
+: 
+ƒ create()
+length
+: 
+2
+name
+: 
+"create"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at create.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at create.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+arguments
+: 
+(...)
+bind
+: 
+ƒ bind()
+call
+: 
+ƒ call()
+caller
+: 
+(...)
+constructor
+: 
+ƒ Function()
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+get arguments
+: 
+ƒ arguments()
+set arguments
+: 
+ƒ arguments()
+get caller
+: 
+ƒ caller()
+set caller
+: 
+ƒ caller()
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+[[Scopes]]
+: 
+Scopes[0]
+[[Scopes]]
+: 
+Scopes[0]
+defineProperties
+: 
+ƒ defineProperties()
+length
+: 
+2
+name
+: 
+"defineProperties"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at defineProperties.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at defineProperties.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+apply
+: 
+ƒ apply()
+length
+: 
+2
+name
+: 
+"apply"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at apply.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at apply.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at defineProperties.invokeGetter (<anonymous>:3:28)]
+bind
+: 
+ƒ bind()
+call
+: 
+ƒ call()
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at defineProperties.invokeGetter (<anonymous>:3:28)]
+constructor
+: 
+ƒ Function()
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+get arguments
+: 
+ƒ arguments()
+set arguments
+: 
+ƒ arguments()
+get caller
+: 
+ƒ caller()
+set caller
+: 
+ƒ caller()
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+[[Scopes]]
+: 
+Scopes[0]
+[[Scopes]]
+: 
+Scopes[0]
+defineProperty
+: 
+ƒ defineProperty()
+length
+: 
+3
+name
+: 
+"defineProperty"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at defineProperty.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at defineProperty.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+entries
+: 
+ƒ entries()
+length
+: 
+1
+name
+: 
+"entries"
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at entries.invokeGetter (<anonymous>:3:28)]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at entries.invokeGetter (<anonymous>:3:28)]
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+freeze
+: 
+ƒ freeze()
+length
+: 
+1
+name
+: 
+"freeze"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+fromEntries
+: 
+ƒ fromEntries()
+getOwnPropertyDescriptor
+: 
+ƒ getOwnPropertyDescriptor()
+getOwnPropertyDescriptors
+: 
+ƒ getOwnPropertyDescriptors()
+length
+: 
+1
+name
+: 
+"getOwnPropertyDescriptors"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+getOwnPropertyNames
+: 
+ƒ getOwnPropertyNames()
+getOwnPropertySymbols
+: 
+ƒ getOwnPropertySymbols()
+getPrototypeOf
+: 
+ƒ getPrototypeOf()
+groupBy
+: 
+ƒ groupBy()
+hasOwn
+: 
+ƒ hasOwn()
+is
+: 
+ƒ is()
+isExtensible
+: 
+ƒ isExtensible()
+isFrozen
+: 
+ƒ isFrozen()
+isSealed
+: 
+ƒ isSealed()
+keys
+: 
+ƒ keys()
+length
+: 
+1
+name
+: 
+"Object"
+preventExtensions
+: 
+ƒ preventExtensions()
+prototype
+: 
+{__defineGetter__: ƒ, __defineSetter__: ƒ, hasOwnProperty: ƒ, __lookupGetter__: ƒ, __lookupSetter__: ƒ, …}
+seal
+: 
+ƒ seal()
+setPrototypeOf
+: 
+ƒ setPrototypeOf()
+values
+: 
+ƒ values()
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+hasOwnProperty
+: 
+ƒ hasOwnProperty()
+length
+: 
+1
+name
+: 
+"hasOwnProperty"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+isPrototypeOf
+: 
+ƒ isPrototypeOf()
+length
+: 
+1
+name
+: 
+"isPrototypeOf"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+propertyIsEnumerable
+: 
+ƒ propertyIsEnumerable()
+toLocaleString
+: 
+ƒ toLocaleString()
+toString
+: 
+ƒ toString()
+valueOf
+: 
+ƒ valueOf()
+__defineGetter__
+: 
+ƒ __defineGetter__()
+__defineSetter__
+: 
+ƒ __defineSetter__()
+__lookupGetter__
+: 
+ƒ __lookupGetter__()
+__lookupSetter__
+: 
+ƒ __lookupSetter__()
+__proto__
+: 
+(...)
+get __proto__
+: 
+ƒ __proto__()
+set __proto__
+: 
+ƒ __proto__()
+[[Scopes]]
+: 
+Scopes[0]
+No properties
+[[Scopes]]
+: 
+Scopes[0]
+No properties
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at [Symbol.hasInstance].invokeGetter (<anonymous>:3:28)]
+constructor
+: 
+ƒ Function()
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+get arguments
+: 
+ƒ arguments()
+set arguments
+: 
+ƒ arguments()
+get caller
+: 
+ƒ caller()
+set caller
+: 
+ƒ caller()
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+[[Scopes]]
+: 
+Scopes[0]
+[[Scopes]]
+: 
+Scopes[0]
+get arguments
+: 
+ƒ arguments()
+set arguments
+: 
+ƒ arguments()
+get caller
+: 
+ƒ caller()
+set caller
+: 
+ƒ caller()
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+[[Scopes]]
+: 
+Scopes[0]
+[[Scopes]]
+: 
+Scopes[0]
+No properties
+arguments
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get arguments (<anonymous>) at apply.invokeGetter (<anonymous>:3:28)]
+bind
+: 
+ƒ bind()
+length
+: 
+1
+name
+: 
+"bind"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+call
+: 
+ƒ call()
+length
+: 
+1
+name
+: 
+"call"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at apply.invokeGetter (<anonymous>:3:28)]
+constructor
+: 
+ƒ Function()
+length
+: 
+1
+name
+: 
+"Function"
+prototype
+: 
+ƒ ()
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+length
+: 
+0
+name
+: 
+"toString"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+get arguments
+: 
+ƒ arguments()
+set arguments
+: 
+ƒ arguments()
+get caller
+: 
+ƒ caller()
+set caller
+: 
+ƒ caller()
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+[[Scopes]]
+: 
+Scopes[0]
+[[Scopes]]
+: 
+Scopes[0]
+arguments
+: 
+(...)
+bind
+: 
+ƒ bind()
+call
+: 
+ƒ call()
+caller
+: 
+(...)
+constructor
+: 
+ƒ Function()
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+get arguments
+: 
+ƒ arguments()
+set arguments
+: 
+ƒ arguments()
+get caller
+: 
+ƒ caller()
+set caller
+: 
+ƒ caller()
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+[[Scopes]]
+: 
+Scopes[0]
+[[Scopes]]
+: 
+Scopes[0]
+call
+: 
+ƒ call()
+length
+: 
+1
+name
+: 
+"call"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at call.invokeGetter (<anonymous>:3:28)]
+constructor
+: 
+ƒ Function()
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+get arguments
+: 
+ƒ arguments()
+set arguments
+: 
+ƒ arguments()
+get caller
+: 
+ƒ caller()
+set caller
+: 
+ƒ caller()
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+[[Scopes]]
+: 
+Scopes[0]
+[[Scopes]]
+: 
+Scopes[0]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at bind.invokeGetter (<anonymous>:3:28)]
+constructor
+: 
+ƒ Function()
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+length
+: 
+0
+name
+: 
+"toString"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+length
+: 
+1
+name
+: 
+"[Symbol.hasInstance]"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+get arguments
+: 
+ƒ arguments()
+length
+: 
+0
+name
+: 
+"get arguments"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+set arguments
+: 
+ƒ arguments()
+length
+: 
+1
+name
+: 
+"set arguments"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+get caller
+: 
+ƒ caller()
+length
+: 
+0
+name
+: 
+"get caller"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+set caller
+: 
+ƒ caller()
+length
+: 
+1
+name
+: 
+"set caller"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+constructor
+: 
+ƒ Object()
+hasOwnProperty
+: 
+ƒ hasOwnProperty()
+isPrototypeOf
+: 
+ƒ isPrototypeOf()
+propertyIsEnumerable
+: 
+ƒ propertyIsEnumerable()
+toLocaleString
+: 
+ƒ toLocaleString()
+toString
+: 
+ƒ toString()
+valueOf
+: 
+ƒ valueOf()
+__defineGetter__
+: 
+ƒ __defineGetter__()
+__defineSetter__
+: 
+ƒ __defineSetter__()
+__lookupGetter__
+: 
+ƒ __lookupGetter__()
+__lookupSetter__
+: 
+ƒ __lookupSetter__()
+__proto__
+: 
+(...)
+get __proto__
+: 
+ƒ __proto__()
+set __proto__
+: 
+ƒ __proto__()
+[[Scopes]]
+: 
+Scopes[0]
+[[Scopes]]
+: 
+Scopes[0]
+call
+: 
+ƒ call()
+length
+: 
+1
+name
+: 
+"call"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at call.invokeGetter (<anonymous>:3:28)]
+constructor
+: 
+ƒ Function()
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+get arguments
+: 
+ƒ arguments()
+set arguments
+: 
+ƒ arguments()
+get caller
+: 
+ƒ caller()
+set caller
+: 
+ƒ caller()
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+[[Scopes]]
+: 
+Scopes[0]
+[[Scopes]]
+: 
+Scopes[0]
+caller
+: 
+[Exception: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at get caller (<anonymous>) at contains.invokeGetter (<anonymous>:3:28)]
+constructor
+: 
+ƒ Function()
+length
+: 
+0
+name
+: 
+""
+toString
+: 
+ƒ toString()
+Symbol(Symbol.hasInstance)
+: 
+ƒ [Symbol.hasInstance]()
+get arguments
+: 
+ƒ arguments()
+set arguments
+: 
+ƒ arguments()
+get caller
+: 
+ƒ caller()
+set caller
+: 
+ƒ caller()
+[[FunctionLocation]]
+: 
+<unknown>
+[[Prototype]]
+: 
+Object
+[[Scopes]]
+: 
+Scopes[0]
+[[Scopes]]
+: 
+Scopes[0]
+item
+: 
+ƒ item()
+length
+: 
+1
+name
+: 
+"item"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+length
+: 
+(...)
+constructor
+: 
+ƒ DOMStringList()
+Symbol(Symbol.iterator)
+: 
+ƒ values()
+Symbol(Symbol.toStringTag)
+: 
+"DOMStringList"
+get length
+: 
+ƒ length()
+[[Prototype]]
+: 
+Object
+assign
+: 
+ƒ assign()
+hash
+: 
+""
+host
+: 
+"chromewebdata"
+hostname
+: 
+"chromewebdata"
+href
+: 
+"chrome-error://chromewebdata/"
+origin
+: 
+"null"
+pathname
+: 
+"/"
+port
+: 
+""
+protocol
+: 
+"chrome-error:"
+reload
+: 
+ƒ reload()
+length
+: 
+0
+name
+: 
+"reload"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+replace
+: 
+ƒ replace()
+length
+: 
+1
+name
+: 
+"replace"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+search
+: 
+""
+toString
+: 
+ƒ toString()
+length
+: 
+0
+name
+: 
+"toString"
+arguments
+: 
+(...)
+caller
+: 
+(...)
+[[Prototype]]
+: 
+ƒ ()
+[[Scopes]]
+: 
+Scopes[0]
+valueOf
+: 
+ƒ valueOf()
+Symbol(Symbol.toPrimitive)
+: 
+undefined
+[[Prototype]]
+: 
+Location
+URL
+: 
+"chrome-error://chromewebdata/"
+activeElement
+: 
+body#body.heavy-ad
+adoptedStyleSheets
+: 
+Proxy(Array) {}
+alinkColor
+: 
+""
+all
+: 
+HTMLAllCollection(24) [html, head, meta, meta, meta, title, style, style, script, body#body.heavy-ad, div.interstitial-wrapper, div#main-content, div#icon.icon, div#main-message, h1, span, a#details-link, div#details.hidden, p, style, aananoswarm, aananoswarm, aananoswarm, aananoswarm, viewport: meta, body: body#body.heavy-ad, main-content: div#main-content, icon: div#icon.icon, main-message: div#main-message, …]
+anchors
+: 
+HTMLCollection []
+applets
+: 
+HTMLCollection []
+baseURI
+: 
+"chrome-error://chromewebdata/"
+bgColor
+: 
+""
+body
+: 
+body#body.heavy-ad
+characterSet
+: 
+"UTF-8"
+charset
+: 
+"UTF-8"
+childElementCount
+: 
+1
+childNodes
+: 
+NodeList(2) [<!DOCTYPE html>, html]
+children
+: 
+HTMLCollection [html]
+compatMode
+: 
+"CSS1Compat"
+contentType
+: 
+"text/html"
+cookie
+: 
+(...)
+currentScript
+: 
+null
+defaultView
+: 
+Window {window: Window, self: Window, document: document, name: '', location: Location, …}
+designMode
+: 
+"off"
+dir
+: 
+"ltr"
+doctype
+: 
+<!DOCTYPE html>
+documentElement
+: 
+html
+documentURI
+: 
+"chrome-error://chromewebdata/"
+domain
+: 
+""
+embeds
+: 
+HTMLCollection []
+featurePolicy
+: 
+FeaturePolicy {}
+fgColor
+: 
+""
+firstChild
+: 
+<!DOCTYPE html>
+firstElementChild
+: 
+html
+fonts
+: 
+FontFaceSet {onloading: null, onloadingdone: null, onloadingerror: null, ready: Promise, status: 'loaded', …}
+forms
+: 
+HTMLCollection []
+fragmentDirective
+: 
+FragmentDirective {items: Array(0)}
+fullscreen
+: 
+false
+fullscreenElement
+: 
+null
+fullscreenEnabled
+: 
+false
+head
+: 
+head
+hidden
+: 
+false
+images
+: 
+HTMLCollection []
+implementation
+: 
+DOMImplementation {}
+inputEncoding
+: 
+"UTF-8"
+isConnected
+: 
+true
+lastChild
+: 
+html
+lastElementChild
+: 
+html
+lastModified
+: 
+"09/20/2025 09:59:32"
+linkColor
+: 
+""
+links
+: 
+HTMLCollection [a#details-link, details-link: a#details-link]
+nextSibling
+: 
+null
+nodeName
+: 
+"#document"
+nodeType
+: 
+9
+nodeValue
+: 
+null
+onabort
+: 
+null
+onanimationend
+: 
+null
+onanimationiteration
+: 
+null
+onanimationstart
+: 
+null
+onauxclick
+: 
+null
+onbeforecopy
+: 
+null
+onbeforecut
+: 
+null
+onbeforeinput
+: 
+null
+onbeforematch
+: 
+null
+onbeforepaste
+: 
+null
+onbeforetoggle
+: 
+null
+onbeforexrselect
+: 
+null
+onblur
+: 
+null
+oncancel
+: 
+null
+oncanplay
+: 
+null
+oncanplaythrough
+: 
+null
+onchange
+: 
+null
+onclick
+: 
+null
+onclose
+: 
+null
+oncommand
+: 
+null
+oncontentvisibilityautostatechange
+: 
+null
+oncontextlost
+: 
+null
+oncontextmenu
+: 
+null
+oncontextrestored
+: 
+null
+oncopy
+: 
+null
+oncuechange
+: 
+null
+oncut
+: 
+null
+ondblclick
+: 
+null
+ondrag
+: 
+null
+ondragend
+: 
+null
+ondragenter
+: 
+null
+ondragleave
+: 
+null
+ondragover
+: 
+null
+ondragstart
+: 
+null
+ondrop
+: 
+null
+ondurationchange
+: 
+null
+onemptied
+: 
+null
+onended
+: 
+null
+onerror
+: 
+null
+onfocus
+: 
+null
+onformdata
+: 
+null
+onfreeze
+: 
+null
+onfullscreenchange
+: 
+null
+onfullscreenerror
+: 
+null
+ongotpointercapture
+: 
+null
+oninput
+: 
+null
+oninvalid
+: 
+null
+onkeydown
+: 
+null
+onkeypress
+: 
+null
+onkeyup
+: 
+null
+onload
+: 
+null
+onloadeddata
+: 
+null
+onloadedmetadata
+: 
+null
+onloadstart
+: 
+null
+onlostpointercapture
+: 
+null
+onmousedown
+: 
+null
+onmouseenter
+: 
+null
+onmouseleave
+: 
+null
+onmousemove
+: 
+null
+onmouseout
+: 
+null
+onmouseover
+: 
+null
+onmouseup
+: 
+null
+onmousewheel
+: 
+null
+onoverscroll
+: 
+null
+onpaste
+: 
+null
+onpause
+: 
+null
+onplay
+: 
+null
+onplaying
+: 
+null
+onpointercancel
+: 
+null
+onpointerdown
+: 
+null
+onpointerenter
+: 
+null
+onpointerleave
+: 
+null
+onpointerlockchange
+: 
+null
+onpointerlockerror
+: 
+null
+onpointermove
+: 
+null
+onpointerout
+: 
+null
+onpointerover
+: 
+null
+onpointerrawupdate
+: 
+null
+onpointerup
+: 
+null
+onprerenderingchange
+: 
+null
+onprogress
+: 
+null
+onratechange
+: 
+null
+onreadystatechange
+: 
+null
+onreset
+: 
+null
+onresize
+: 
+null
+onresume
+: 
+null
+onscroll
+: 
+null
+onscrollend
+: 
+null
+onscrollsnapchange
+: 
+null
+onscrollsnapchanging
+: 
+null
+onsearch
+: 
+null
+onsecuritypolicyviolation
+: 
+null
+onseeked
+: 
+null
+onseeking
+: 
+null
+onselect
+: 
+null
+onselectionchange
+: 
+null
+onselectstart
+: 
+null
+onslotchange
+: 
+null
+onstalled
+: 
+null
+onsubmit
+: 
+null
+onsuspend
+: 
+null
+ontimeupdate
+: 
+null
+ontoggle
+: 
+null
+ontransitioncancel
+: 
+null
+ontransitionend
+: 
+null
+ontransitionrun
+: 
+null
+ontransitionstart
+: 
+null
+onvisibilitychange
+: 
+null
+onvolumechange
+: 
+null
+onwaiting
+: 
+null
+onwebkitanimationend
+: 
+null
+onwebkitanimationiteration
+: 
+null
+onwebkitanimationstart
+: 
+null
+onwebkitfullscreenchange
+: 
+null
+onwebkitfullscreenerror
+: 
+null
+onwebkittransitionend
+: 
+null
+onwheel
+: 
+null
+ownerDocument
+: 
+null
+parentElement
+: 
+null
+parentNode
+: 
+null
+pictureInPictureElement
+: 
+null
+pictureInPictureEnabled
+: 
+true
+plugins
+: 
+HTMLCollection []
+pointerLockElement
+: 
+null
+prerendering
+: 
+false
+previousSibling
+: 
+null
+readyState
+: 
+"complete"
+referrer
+: 
+""
+rootElement
+: 
+null
+scripts
+: 
+HTMLCollection [script]
+scrollingElement
+: 
+html
+softNavigations
+: 
+0
+styleSheets
+: 
+StyleSheetList {0: CSSStyleSheet, 1: CSSStyleSheet, 2: CSSStyleSheet, length: 3}
+textContent
+: 
+null
+timeline
+: 
+DocumentTimeline {currentTime: 0, duration: null}
+title
+: 
+""
+visibilityState
+: 
+"visible"
+vlinkColor
+: 
+""
+wasDiscarded
+: 
+false
+webkitCurrentFullScreenElement
+: 
+null
+webkitFullscreenElement
+: 
+null
+webkitFullscreenEnabled
+: 
+false
+webkitHidden
+: 
+false
+webkitIsFullScreen
+: 
+false
+webkitVisibilityState
+: 
+"visible"
+xmlEncoding
+: 
+null
+xmlStandalone
+: 
+false
+(...)
+parentElement
+: 
+body#body.heavy-ad
+parentNode
+: 
+body#body.heavy-ad
+part
+: 
+DOMTokenList [value: '']
+previousElementSibling
+: 
+aananoswarm
+previousSibling
+: 
+aananoswarm
+scrollHeight
+: 
+0
+scrollLeft
+: 
+0
+scrollTop
+: 
+0
+scrollWidth
+: 
+0
+slot
+: 
+""
+spellcheck
+: 
+true
+style
+: 
+CSSStyleDeclaration {accentColor: '', additiveSymbols: '', alignContent: '', alignItems: '', alignSelf: '', …}
+tabIndex
+: 
+-1
+tagName
+: 
+"AANANOSWARM"
+textContent
+: 
+""
+title
+: 
+""
+translate
+: 
+true
+virtualKeyboardPolicy
+: 
+""
+writingSuggestions
+: 
+"true"

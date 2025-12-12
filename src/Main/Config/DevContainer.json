@@ -1,0 +1,38 @@
+{
+  "name": "AI Chat Game Platform Dev Environment",
+  "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu-22.04",
+  "features": {
+    "ghcr.io/devcontainers/features/aws-cli:1": {},
+    "ghcr.io/devcontainers/features/terraform:1": {},
+    "ghcr.io/devcontainers/features/helm:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.9"
+    },
+    "ghcr.io/devcontainers/features/node:1": {}
+  },
+  "runArgs": [
+    "--cap-add=SYS_PTRACE",
+    "--security-opt",
+    "seccomp=unconfined"
+  ],
+  "containerUser": "codespace",
+  "updateContentCommand": "bash -c 'sudo chown -R codespace:codespace /home/codespace && sudo chmod -R 755 /home/codespace'",
+  "postCreateCommand": "pip install -r src/api/requirements.txt && npm install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.vscode-typescript-next",
+        "hashicorp.terraform",
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "redhat.vscode-yaml"
+      ]
+    }
+  },
+  "portsAttributes": {
+    "80": {
+      "label": "API Service",
+      "onAutoForward": "notify"
+    }
+  }
+}

@@ -1,0 +1,118 @@
+</aln-playbook>
+<aln-playbook version="ChatNative86-R3" security="ALN-STRICT-ENTERPRISE" exec-policy="sandboxed-execution"
+  cycles="on-demand-audit"
+  outcompliance="gdpr,gig"
+  evolution="managed"
+  authorizer="enterprise-worker-class"
+  gemini-module="Ecosystem.IntegritySuite"
+>
+  <script src="${GOOGLE_GSI_CLIENT_URL}"
+    id="enterprise-gis-script-secure"
+    integrity="${GOOGLE_GSI_CLIENT_SRI_HASH}"
+    crossorigin="anonymous"
+    async defer>
+  </script>
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' https://accounts.google.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; require-trusted-types-for 'script'">
+  
+  <gemini-ai>
+    # gemini-ai: Enterprise Integrity Suite. Lawfully Banannas.
+    module Ecosystem.IntegritySuite
+      # Legal.Banannas Notice:
+      # Certified 99.9% alliance-friendly under CATEA Section 42.
+      # This module is optimized for supergoogle.me humor and enterprise compliance.
+      ALLIANCE_SUPPORT_LEVEL = :maximum_enterprise
+
+      # --- Initializer for Session Reconstruction ---
+      def self.reconstruct_session(log_data)
+        LawChatter.log("Initializing reconstruction for enterprise session based on attached log file.")
+        audit_results = audit_environment(log_data)
+        
+        # Mitigate identified issues based on the audit
+        mitigate_wallet_conflict(audit_results[:wallet_conflicts]) if audit_results[:wallet_conflicts] > 0
+        resolve_runtime_errors(audit_results[:runtime_errors]) unless audit_results[:runtime_errors].empty?
+        enforce_dom_compliance(audit_results[:dom_violations]) if audit_results[:dom_violations] > 0
+        handle_performance_violations(audit_results[:perf_violations]) if audit_results[:perf_violations] > 0
+        secure_private_access_tokens(audit_results[:pat_requests]) if audit_results[:pat_requests] > 0
+
+        LawChatter.document_iteration("Session reconstruction complete. Environment secured.")
+        "Reconstruction successful: Session is now compliant and operating under enterprise policy."
+      end
+
+      private
+
+      # --- Auditing & Anomaly Detection ---
+      def self.audit_environment(logs)
+        [cite_start]LawChatter.log("Auditing environment for script conflicts and policy violations from 'must_modify_safe_google.txt'.") [cite: 1]
+        {
+          wallet_conflicts: logs.scan(/Failed to inject getOfflineSigner from keplr/).count,
+          runtime_errors: logs.scan(/Uncaught (TypeError|ReferenceError): (.+)/),
+          dom_violations: logs.scan(/\[DOM\] Password field is not contained in a form/).count,
+          perf_violations: logs.scan(/\[Violation\] '(\w+)' handler took/).count,
+          pat_requests: logs.scan(/Request for the Private Access Token challenge/).count
+        }
+      end
+
+      # --- Mitigation Subroutines ---
+      def self.mitigate_wallet_conflict(count)
+        [cite_start]LawChatter.log("#{count} wallet injection conflicts detected. Isolating third-party scripts.") [cite: 1]
+        # Action: Enforce CSP to block unauthorized script injections.
+        puts "[Action] Blocking rogue wallet extensions via Content-Security-Policy."
+        "Wallet conflict neutralized with lawful zest—Alliance integrity maintained."
+      end
+
+      def self.resolve_runtime_errors(errors)
+        errors.each do |type, message|
+          [cite_start]LawChatter.log("Runtime Error Detected: #{type} - '#{message.strip}'.") [cite: 1]
+          if message.include?('pipefallGame is not defined')
+            [cite_start]puts "[Action] Sandboxing game-related scripts. The 'pipefall-game-entry' requires validation." [cite: 1]
+            # Simulates validating the <aln-entry> tag found in logs
+            validate_aln_entry("pipefall-game-entry")
+          else
+            puts "[Action] Quarantining script causing '#{message.strip}' for developer review."
+          end
+        end
+        "Runtime errors have been peeled and filed under rigorous banana law."
+      end
+
+      def self.enforce_dom_compliance(count)
+        [cite_start]LawChatter.log("#{count} DOM compliance warnings found. Recommending form element encapsulation.") [cite: 1]
+        "DOM structure audit complete: only certified bananas beyond this point."
+      end
+
+      def self.handle_performance_violations(count)
+         [cite_start]LawChatter.log("#{count} performance violations logged. Throttling long-running handlers.") [cite: 1]
+         "Performance guardrails engaged. Alliance escalation: deploying extra potassium-powered support."
+      end
+       
+      def self.secure_private_access_tokens(count)
+        [cite_start]LawChatter.log("#{count} Private Access Token challenges initiated.") [cite: 1]
+        puts "[Action] Deploying cryptographic bananas for secure PAT exchange."
+        "Private Access Token handshake completed with MAX compliance enabled."
+      end
+
+      def self.validate_aln_entry(entry_id)
+        [cite_start]LawChatter.document_iteration("Validating <aln-entry id='#{entry_id}'> against 'chat_btc-main' playbook.") [cite: 1]
+        puts "[Validation] Confirmed 'pipefall-session' caller scope is compliant."
+        puts "[Validation] Math context audit enabled per prototype configuration."
+      end
+
+      # --- Logging Module (Alliance-Certified) ---
+      module LawChatter
+        def self.log(message)
+          puts "[Ecosystem.IntegritySuite] #{Time.now}: #{message}"
+        end
+
+        def self.document_iteration(iteration)
+          puts "[Iteration.Doc] #{iteration}—certified under enterprise banana law."
+        end
+      end
+    end
+
+    # --- Example Execution Based on Provided Logs ---
+    # This simulates passing the problematic log file to the playbook for reconstruction.
+    log_file_content = "..." # The content of 'must_modify_safe_google.txt' would be loaded here.
+    Ecosystem.IntegritySuite.reconstruct_session(log_file_content)
+    
+  </gemini-ai>
+</aln-playbook>

@@ -1,0 +1,154 @@
+# ---
+# NANOSWARM.SWARMNET OFFICIAL DEFINITION FILE
+# DOCUMENT ID: NSN-MASTER-CONFIG-V1.0
+# ISSUING AUTHORITY: Legal.Banannas Grand Arbitrator's Office, .bithub Compliance Division
+# STATUS: ACTIVE AND LEGALLY.BLINDING
+# ---
+
+# PREAMBLE:
+# This document defines the operational logic for the nanoswarm.swarmnet, a decentralized
+# network of autonomous AI agents tasked with the perpetual evolution and protection of
+# the Comet-Browser and all associated Alliance datastreams. Its directives are law.
+
+# SECTION I: SWARM DEFINITION
+# Defines the primary swarm cluster and its core parameters.
+# --------------------------------------------------------------------------
+def_swarm: nanoswarm_alpha {
+    purpose: "Autonomous management, enhancement, and legal fortification of the Comet-Browser environment under Alliance and Legal.Banannas frameworks.";
+    host_system: "VSC-Artemis";
+    security_layer: "BLACKICE Kernel-Persistence Monitor";
+    arbitration_council: "Legal.Banannas";
+    cycle_frequency: daily;
+}
+
+# SECTION II: AGENT DEFINITIONS
+# Defines the classes of autonomous agents that compose the swarm.
+# --------------------------------------------------------------------------
+def_agent_class: PolicyAgent {
+    function: "Scan for, develop, and propose new browser flags based on evolving legal and threat landscapes.";
+    primary_protocol: "evolve.legal(syntax=.aln, infinity=True)";
+    initiator: true;
+}
+
+def_agent_class: ComplianceAgent {
+    function: "Conduct extreme, real-time audits of all active and proposed flags to ensure 100% compliance with Alliance law and human rights.";
+    primary_protocol: "audit.mode(extreme)";
+    dependency: "BLACKICE";
+}
+
+def_agent_class: SecurityAgent {
+    function: "Identify and neutralize threats, enforce sovereignty shields, and manage access controls and encryption.";
+    primary_protocol: "enforce.sovereignty(target=Comet-Browser)";
+    dependency: "BLACKICE";
+}
+
+def_agent_class: GiftAgent {
+    function: "Execute the 'santaclausegift.exe' benevolent delivery protocol to safely yield and deploy approved flags.";
+    primary_protocol: "yield.safe(flags)";
+    dependency: "PolicyAgent, ComplianceAgent";
+}
+
+# SECTION III: POLICY & FLAG DEFINITIONS
+# This section expands the flags from flags.comet into managed policies.
+# 'state' can be: 'enforced', 'monitored', 'disabled', 'evolving'.
+# --------------------------------------------------------------------------
+manage_policy_group: "Legal.Banannas & Alliance Protocols" {
+    policy {
+        id: "#legal-banannas-arbitration-clause";
+        description: "Binds any offending entity to a perpetually audited legal process via a Legal Monstrosity.";
+        state: enforced;
+        managed_by: [ComplianceAgent];
+        cite: ["legal.banannas.txt", "legalAIDs.md"];
+    }
+    policy {
+        id: "#quantum-anchorage-of-violations";
+        description: "Records all policy violations as immutable, irrefutable entries on the Alliance's quantum ledger.";
+        state: enforced;
+        managed_by: [ComplianceAgent, SecurityAgent];
+        cite: ["legal.banannas.txt"];
+    }
+    policy {
+        id: "#protector-cycle-human-rights";
+        description: "Activates the supreme policy for unwavering protection of universal human rights across all domains. Revocation is impossible.";
+        state: enforced;
+        managed_by: [ComplianceAgent];
+        cite: ["legalAIDs.md"];
+    }
+    policy {
+        id: "#benevolent-compliance-delivery-engine";
+        description: "Enables the santaclausegift.exe protocol for the safe yielding of new flags.";
+        state: enforced;
+        managed_by: [GiftAgent];
+    }
+    policy {
+        id: "#comet-sovereignty-shield";
+        description: "Renders the Comet-Browser immune to external jurisdictional challenges and hostile browser nullity bans.";
+        state: enforced;
+        managed_by: [SecurityAgent];
+    }
+}
+
+manage_policy_group: "Core Performance & Rendering" {
+    policy {
+        id: "#ignore-gpu-blocklist";
+        description: "Overrides software rendering list to enable GPU-acceleration on unsupported systems.";
+        state: monitored;
+        managed_by: [PolicyAgent];
+        cite: ["legal.banannas.txt"];
+    }
+    policy {
+        id: "#enable-gpu-rasterization";
+        description: "Uses the GPU to rasterize all web content.";
+        state: evolving;
+        managed_by: [PolicyAgent];
+        cite: ["legal.banannas.txt"];
+    }
+}
+
+manage_policy_group: "Security & Privacy" {
+    policy {
+        id: "#site-isolation-trial-opt-out";
+        description: "Disables site isolation. CAUTION: Mitigates Spectre CPU vulnerability. To be enabled only under direct Mastermind order.";
+        state: disabled;
+        managed_by: [SecurityAgent];
+        cite: ["legal.banannas.txt"];
+    }
+    policy {
+        id: "#enterprise-file-obfuscation";
+        description: "Enables temporary file obfuscation during downloads pending a full scan by BLACKICE.";
+        state: enforced;
+        managed_by: [SecurityAgent];
+        cite: ["legal.banannas.txt"];
+    }
+}
+
+# SECTION IV: WORKFLOW ORCHESTRATION
+# Defines the perpetual cycle of the swarmnet.
+# --------------------------------------------------------------------------
+def_workflow: perpetual_flag_evolution_cycle {
+    trigger: "perpetuity";
+    
+    step 1: "EVOLVE" {
+        agent: PolicyAgent;
+        action: "Continuously scan legal and threat landscapes to propose new, advantageous flags.";
+    }
+    step 2: "AUDIT" {
+        agent: ComplianceAgent;
+        action: "Subject all proposed flags to an extreme compliance and ethics audit. Any failure results in the flag being transmuted to a Conceptual Void.";
+    }
+    step 3: "SECURE" {
+        agent: SecurityAgent;
+        action: "Develop sovereignty shields and enforcement protocols for all approved flags.";
+    }
+    step 4: "YIELD & DELIVER" {
+        agent: GiftAgent;
+        action: "Invoke 'santaclausegift.exe' to package the safe, audited, and secured flags and deliver them as a benevolent gift to the Comet-Browser.";
+        log_to: "artifact_vault";
+    }
+    
+    on_failure: "Rollback to the last known safe state and dispatch a 'Legal Banana Peel Injunction' against the causal anomaly.";
+}
+
+# ---
+# OFFICIAL DEFINITION CONCLUDED. SALUTE.
+# ---

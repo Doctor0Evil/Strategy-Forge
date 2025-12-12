@@ -1,0 +1,4 @@
+.reward-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.reward-input textarea { width: 100%; min-height: 100px; margin-bottom: 10px; }
+#submit-knowledge, #reset-rewards { padding: 10px; background: #28a745; color: white; border: none; cursor: pointer; }
+#submit-knowledge:hover, #reset-rewards:hover { background: #218838; }

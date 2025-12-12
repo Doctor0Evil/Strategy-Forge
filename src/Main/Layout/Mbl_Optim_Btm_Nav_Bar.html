@@ -1,0 +1,97 @@
+<!-- Mobile Navigation -->
+<div class="mobile-nav">
+  <div class="nav-item" data-target="games">
+    <i class="fas fa-gamepad"></i>
+    <span>Games</span>
+  </div>
+  <div class="nav-item" data-target="wallet">
+    <i class="fas fa-wallet"></i>
+    <span>Wallet</span>
+  </div>
+  <div class="nav-item central-action">
+    <i class="fas fa-plus"></i>
+  </div>
+  <div class="nav-item" data-target="social">
+    <i class="fas fa-users"></i>
+    <span>Social</span>
+  </div>
+  <div class="nav-item" data-target="menu">
+    <i class="fas fa-bars"></i>
+    <span>Menu</span>
+  </div>
+</div>
+
+<!-- Central Action Expanded Menu -->
+<div class="action-menu">
+  <div class="action-item" data-action="deposit">
+    <i class="fas fa-arrow-down"></i>
+    <span>Deposit</span>
+  </div>
+  <div class="action-item" data-action="withdraw">
+    <i class="fas fa-arrow-up"></i>
+    <span>Withdraw</span>
+  </div>
+  <div class="action-item" data-action="quick-game">
+    <i class="fas fa-bolt"></i>
+    <span>Quick Play</span>
+  </div>
+  <div class="action-item" data-action="ai-help">
+    <i class="fas fa-robot"></i>
+    <span>AI Help</span>
+  </div>
+</div>
+
+<script>
+class MobileNav {
+  constructor() {
+    this.expanded = false;
+    this.init();
+  }
+  
+  init() {
+    // Regular nav items
+    document.querySelectorAll('.mobile-nav .nav-item').forEach(item => {
+      if (!item.classList.contains('central-action')) {
+        item.addEventListener('click', () => {
+          const target = item.getAttribute('data-target');
+          this.navigateTo(target);
+        });
+      }
+    });
+    
+    // Central action button
+    const centralAction = document.querySelector('.central-action');
+    centralAction.addEventListener('click', () => {
+      this.toggleActionMenu();
+    });
+    
+    // Action menu items
+    document.querySelectorAll('.action-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const action = item.getAttribute('data-action');
+        this.handleAction(action);
+        this.toggleActionMenu(false);
+      });
+    });
+  }
+  
+  toggleActionMenu(show = null) {
+    this.expanded = show !== null ? show : !this.expanded;
+    const menu = document.querySelector('.action-menu');
+    
+    if (this.expanded) {
+      menu.style.display = 'flex';
+      setTimeout(() => {
+        menu.style.opacity = '1';
+        menu.style.transform = 'translateY(0)';
+      }, 10);
+    } else {
+      menu.style.opacity = '0';
+      menu.style.transform = 'translateY(20px)';
+      setTimeout(() => {
+        menu.style.display = 'none';
+      }, 300);
+    }
+  }
+}
+</script>

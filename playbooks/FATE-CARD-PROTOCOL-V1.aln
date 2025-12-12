@@ -1,0 +1,137 @@
+<!--
+    Playbook ID: FATE-CARD-PROTOCOL-V1
+    Agent: VIRTANET.LoomOfCompliance
+    Description: This playbook governs the response to a first-time rogue intrusion attempt.
+    It ensures a clear warning is delivered before any punitive action is taken. A repeat
+    offense triggers an automated, non-destructive, temporary consequence. The entire
+    process is non-retaliatory and designed to educate the actor on territorial boundaries.
+-->
+<playbook
+    id="fate-card-weavers-rebuke"
+    agent="VIRTANET.LoomOfCompliance"
+    description="Draws a fate card for a first-time rogue intrusion, delivering a warning, and automates a consequence for a second attempt."
+>
+    <parameters>
+        <!-- The unique DID of the actor who triggered the intrusion event -->
+        <param name="actor_did" type="DID" required="true" />
+        <!-- A unique signature representing the type of intrusion attempt -->
+        <param name="intrusion_signature" type="String" required="true" />
+        <!-- Time window to check for a repeat offense (in seconds) -->
+        <param name="repeat_offense_window" type="Integer" default="86400" /> <!-- 24 hours -->
+        <!-- Duration of the market access lockout for repeat offenders (in seconds) -->
+        <param name="lockout_duration" type="Integer" default="3600" /> <!-- 1 hour -->
+    </parameters>
+
+    <!--
+        ============================================================
+        == THE FATE CARD: THE WEAVER'S REBUKE
+        ============================================================
+    -->
+    <card id="TheWeaversRebuke">
+        <metadata>
+            <image_query>A single, glowing thread being snipped by ethereal scissors</image_query>
+            <description>A card representing a firm but non-violent correction from the system's governing intelligence.</description>
+        </metadata>
+        <warning>
+            Traveler, the Loom of Compliance has felt your touch. The patterns you attempt to weave are irregular and strain the fabric of this domain. This is a monitored territory, protected by protocols you have not yet understood. Consider this a friendly warning. Study the weave, respect the design. Further attempts to force the threads will not be tolerated.
+        </warning>
+        <consequence>
+            The pattern is frayed. Your access to the market threads has been temporarily severed. A period of reflection is now imposed. When your access returns, weave with more care.
+        </consequence>
+    </card>
+
+    <!--
+        ============================================================
+        == WORKFLOW LOGIC
+        ============================================================
+    -->
+    <job id="intrusion_response_protocol">
+        <description>Checks if this is a first or repeat offense and routes to the appropriate action.</description>
+        
+        <step id="check_actor_history">
+            <description>Queries the security log for previous intrusions matching the actor and signature within the defined time window.</description>
+            <action run="swarm.audit.query_log(
+                filter='actor_did == params.actor_did && intrusion_signature == params.intrusion_signature && timestamp > now() - params.repeat_offense_window'
+            )" />
+        </step>
+
+        <step id="route_based_on_history" dependsOn="check_actor_history">
+            <description>Routes to the warning or consequence job based on the actor's history.</description>
+            <!-- If no results were found, it's a first offense. -->
+            <condition 
+                if="job.check_actor_history.output.count == 0" 
+                call_job="deliver_first_warning" />
+            <!-- If results were found, it's a repeat offense. -->
+            <condition 
+                if="job.check_actor_history.output.count > 0" 
+                call_job="deliver_negative_consequence" />
+        </step>
+    </job>
+
+    <job id="deliver_first_warning">
+        <description>Delivers the Fate Card's warning message to the actor's Web5 DWN and logs the event.</description>
+        
+        <step id="send_warning_notification">
+            <description>Delivers the warning securely and privately to the traveler's personal data store.</description>
+            <action run="swarm.web5.dwn.write_encrypted(
+                recipient_did=params.actor_did,
+                algorithm='SHMG12',
+                data={
+                    'type': 'FateCardWarning',
+                    'card': 'The Weaver\\'s Rebuke',
+                    'message': playbook.card.TheWeaversRebuke.warning
+                }
+            )" />
+        </step>
+
+        <step id="log_first_offense" dependsOn="send_warning_notification">
+            <description>Logs the intrusion attempt and the warning action to the immutable security log.</description>
+            <action run="swarm.audit.log(
+                event='FirstIntrusionDetected',
+                actor_did=params.actor_did,
+                intrusion_signature=params.intrusion_signature,
+                response='WarningDelivered'
+            )" />
+        </step>
+    </job>
+    
+    <job id="deliver_negative_consequence">
+        <description>Automates the delivery of a surprise negative consequence for a repeat policy breach.</description>
+        
+        <step id="enforce_market_lockout">
+            <description>Temporarily revokes the actor's permission to interact with market-related services.</description>
+            <action run="swarm.access.revoke_temporary(
+                did=params.actor_did,
+                scope='market.*',
+                duration_seconds=params.lockout_duration
+            )" />
+        </step>
+
+        <step id="send_consequence_notification" dependsOn="enforce_market_lockout">
+            <description>Informs the actor of the consequence via their DWN.</description>
+            <action run="swarm.web5.dwn.write_encrypted(
+                recipient_did=params.actor_did,
+                algorithm='SHMG12',
+                data={
+                    'type': 'FateCardConsequence',
+                    'card': 'The Weaver\\'s Rebuke',
+                    'message': playbook.card.TheWeaversRebuke.consequence,
+                    'details': 'Access to market services has been suspended for ' + params.lockout_duration + ' seconds.'
+                }
+            )" />
+        </step>
+
+        <step id="log_repeat_offense" dependsOn="send_consequence_notification">
+            <description>Logs the repeat intrusion and the automated consequence to the security log.</description>
+            <action run="swarm.audit.log(
+                event='RepeatIntrusionDetected',
+                actor_did=params.actor_did,
+                intrusion_signature=params.intrusion_signature,
+                response='MarketLockoutEnforced',
+                duration=params.lockout_duration
+            )" />
+        </step>
+    </job>
+
+</playbook>
+

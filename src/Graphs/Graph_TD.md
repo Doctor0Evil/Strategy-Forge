@@ -1,0 +1,40 @@
+graph TD
+    A[Main Menu] --> B[Game Modes]
+    A --> C[DAO Governance]
+    A --> D[AI Navigator]
+    A --> E[Social Hub]
+    A --> F[Wallet]
+    A --> G[Marketplace]
+    
+    B --> B1[Provably Fair Dice]
+    B --> B2[Multiply BTC]
+    B --> B3[Wheel of Fortune]
+    B --> B4[AI Story Adventure]
+    B --> B5[PvP Battles]
+    B --> B6[Prediction Markets]
+    
+    C --> C1[Proposals]
+    C --> C2[Voting]
+    C --> C3[Tokenomics]
+    C --> C4[Treasury]
+    C --> C5[Delegate System]
+    
+    D --> D1[Voice Commands]
+    D --> D2[Smart Suggestions]
+    D --> D3[Game Strategy AI]
+    D --> D4[Support Bot]
+    
+    E --> E1[Clans]
+    E --> E2[Leaderboards]
+    E --> E3[Chat System]
+    E --> E4[Tournaments]
+    
+    F --> F1[Deposit]
+    F --> F2[Withdraw]
+    F --> F3[Transaction History]
+    F --> F4[CHAT-AI Staking]
+    
+    G --> G1[NFT Avatars]
+    G --> G2[Power-ups]
+    G --> G3[Game Skins]
+    G --> G4[Token Swap]

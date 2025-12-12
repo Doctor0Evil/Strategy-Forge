@@ -1,0 +1,146 @@
+<!-- Main Navigation Component -->
+<div class="mega-menu">
+  <!-- Primary Menu -->
+  <div class="menu-column">
+    <div class="menu-item" data-submenu="games">
+      <i class="fas fa-gamepad"></i>
+      <span>Games</span>
+      <i class="fas fa-chevron-right"></i>
+    </div>
+    <div class="menu-item" data-submenu="dao">
+      <i class="fas fa-landmark"></i>
+      <span>DAO Governance</span>
+      <i class="fas fa-chevron-right"></i>
+    </div>
+    <div class="menu-item" data-submenu="ai">
+      <i class="fas fa-robot"></i>
+      <span>AI Assistant</span>
+      <i class="fas fa-chevron-right"></i>
+    </div>
+  </div>
+  
+  <!-- Submenu Panels -->
+  <div class="submenu-panel" id="games-submenu">
+    <div class="submenu-header">
+      <button class="back-button"><i class="fas fa-arrow-left"></i></button>
+      <h3>Game Modes</h3>
+    </div>
+    
+    <div class="game-grid">
+      <div class="game-card" data-game="dice">
+        <div class="game-icon" style="background: #FF6384;">
+          <i class="fas fa-dice"></i>
+        </div>
+        <h4>Provably Fair Dice</h4>
+        <p>Classic BTC dice with adjustable risk</p>
+        <div class="game-stats">
+          <span><i class="fas fa-users"></i> 1,245 playing</span>
+          <span><i class="fas fa-bolt"></i> 0.5s avg. play</span>
+        </div>
+      </div>
+      
+      <!-- 5 more game cards -->
+    </div>
+    
+    <div class="quick-access">
+      <button class="quick-btn">
+        <i class="fas fa-trophy"></i>
+        Tournaments
+      </button>
+      <button class="quick-btn">
+        <i class="fas fa-users"></i>
+        Clan Battles
+      </button>
+    </div>
+  </div>
+  
+  <!-- DAO Governance Submenu -->
+  <div class="submenu-panel" id="dao-submenu">
+    <!-- Similar structure with governance options -->
+    <div class="dao-actions">
+      <div class="dao-card" data-action="create-proposal">
+        <i class="fas fa-edit"></i>
+        <span>Create Proposal</span>
+      </div>
+      <div class="dao-card" data-action="active-votes">
+        <i class="fas fa-vote-yea"></i>
+        <span>Active Votes</span>
+        <span class="badge">12</span>
+      </div>
+      <!-- More DAO actions -->
+    </div>
+  </div>
+</div>
+
+<script>
+// Menu interaction controller
+class MenuSystem {
+  constructor() {
+    this.currentMenu = null;
+    this.history = [];
+    this.init();
+  }
+  
+  init() {
+    document.querySelectorAll('.menu-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const submenu = item.getAttribute('data-submenu');
+        this.openSubmenu(submenu);
+      });
+    });
+    
+    document.querySelectorAll('.back-button').forEach(btn => {
+      btn.addEventListener('click', () => this.goBack());
+    });
+    
+    // Add keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') this.nextMenu();
+      if (e.key === 'ArrowLeft') this.goBack();
+    });
+  }
+  
+  openSubmenu(menuId) {
+    this.history.push(menuId);
+    this.showMenu(menuId);
+  }
+  
+  showMenu(menuId) {
+    // Hide all first
+    document.querySelectorAll('.submenu-panel').forEach(panel => {
+      panel.style.display = 'none';
+    });
+    
+    // Show selected
+    const panel = document.getElementById(`${menuId}-submenu`);
+    if (panel) {
+      panel.style.display = 'block';
+      this.currentMenu = menuId;
+      
+      // Update AI suggestions based on context
+      this.updateAISuggestions(menuId);
+    }
+  }
+  
+  updateAISuggestions(context) {
+    const suggestions = {
+      'games': [
+        { icon: 'fas fa-fire', text: 'Hot Game: BTC Multiplier (5x streak!)', action: 'openGame("multiply")' },
+        { icon: 'fas fa-users', text: 'Join your clan in a tournament', action: 'openTournament()' }
+      ],
+      'dao': [
+        { icon: 'fas fa-coins', text: 'Stake CHAT-AI to vote', action: 'openStaking()' },
+        { icon: 'fas fa-bullhorn', text: 'Proposal ending soon: Fee reduction', action: 'openProposal(42)' }
+      ]
+    };
+    
+    const aiPanel = document.getElementById('ai-suggestions');
+    aiPanel.innerHTML = suggestions[context]?.map(s => `
+      <div class="suggestion" onclick="${s.action}">
+        <i class="${s.icon}"></i>
+        <span>${s.text}</span>
+      </div>
+    `).join('') || '';
+  }
+}
+</script>

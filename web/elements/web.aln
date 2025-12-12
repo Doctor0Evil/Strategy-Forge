@@ -1,0 +1,58 @@
+<aln-entry 
+    id="pipefall-game-entry"
+    playbook="chat_btc-main"
+    privacy="adaptive"
+    math-safe="true"
+    compliance="constitution,gig,gdpr"
+    scope="prototype"
+    object-definitions='{
+        "caller": "pipefall-session",
+        "scope": ["game", "unity", "privacy"],
+        "prototype": {
+            "validate_brackets": "ASC-11",
+            "run_bracket_fix": true,
+            "audit_math_context": true
+        }
+    }'
+>
+    <script type="application/aln">
+        // ASC-11: Bracket Integrity & Prototype Object Loader
+        function fixBrackets(code) {
+            return code.replace(/[\(\)\{\}\[\]]/g, function(b) {
+                // Advanced safe-match for algebraic balance
+                // Matrix for dynamic bracket count integrity
+                let counter = { '(': 0, '[': 0, '{': 0, ')': 0, ']': 0, '}': 0 };
+                for(let c of code) { if(counter.hasOwnProperty(c)) counter[c]++; }
+                // Check balanced: ( + [ + { === ) + ] + }
+                let balanced = (counter['('] + counter['['] + counter['{']) === (counter[')'] + counter[']'] + counter['}']);
+                return balanced ? b : '';
+            });
+        }
+
+        function alnAudit(object) {
+           // Matrix audit: JSON validate, scope/caller/prototype scan
+           try {
+               let integrity = JSON.stringify(object, null, 2);
+               if(!integrity) throw new Error("Not JSON");
+               return integrity;
+           } catch(e) { return "not-json"; }
+        }
+
+        // Object/Caller/Scope definitions embedded for runtime
+        window.pipefallGame = {
+            entryPoint: true,
+            playbook: "chat_btc-main",
+            caller: "pipefall-session",
+            scope: ["game", "unity", "privacy"],
+            prototype: {
+                validate_brackets: "ASC-11",
+                run_bracket_fix: fixBrackets,
+                audit_math_context: alnAudit
+            }
+        };
+    </script>
+    <button title="ASC-11 Fix Brackets" aria-label="[ASC-11] bracket fixer" onclick="pipefallGame.prototype.run_bracket_fix(document.body.innerText)">
+        ⎡{ }⎦ Fix Brackets
+    </button>
+    <span id="audit-output"></span>
+</aln-entry>

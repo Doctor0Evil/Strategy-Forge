@@ -1,0 +1,102 @@
+// SoFi Advanced Scope Automation .aln Playbook
+:meta
+  title: SoFi Scope Definition Automation
+  author: sofi-banking.aln-labs
+  version: 1.0.0
+  compliance: comet-interop, web5-safe
+  description: Automates the definition, instantiation, and compliance-anchoring of SoFi banking, crypto, asset, payment scopes for web embedding and dynamic console control.
+
+:include
+  .aln/lib/comet-browser-elements.aln
+  .aln/lib/crypto-basics.aln
+  .aln/lib/payment-swift.aln
+
+// SCOPES: BANKING, CRYPTO, PAYMENT - INIT AND EMBED
+:define scope.bank
+  properties:
+    checking:
+      enabled: true
+      apy: 4.6%
+      fee-free: true
+    savings:
+      enabled: true
+      apy: 4.8%
+      goal-tracking: true
+    lending:
+      studentloan: enabled
+      personal: enabled
+      home: enabled
+      auto: comingsoon
+  compliance:
+    audit: enabled
+    access-level: user
+    transfer-policy: safe
+    api-access: enabled
+:end
+
+:define scope.crypto
+  properties:
+    wallet: sofiWallet
+    getKey: getBitcoinKey, getEthereumKey
+    sign: signAmino, signERC20
+    bridge: Web5.Anchorage.Bridge
+    compliance:
+      hardware-protect: c86
+      migration: web3->web5
+      audit: enabled
+      access-level: user
+:end
+
+:define scope.payment
+  properties:
+    addpaymentinfo: enabled
+    addshippinginfo: enabled
+    vendors: major-supported
+    fee: 0.00
+    currency: USD, BTC, ETH
+    session:
+      autosave: true
+      audit: enabled
+  compliance:
+    PCI-compliant: true
+    safe-execution: true
+:end
+
+// META OBJECTS
+:define meta.soFiStory
+  history: "SoFi, founded in 2011, now a leading US fintech, offers digital banking, investing, crypto, personal finance tools, and loans."
+:end
+
+:define meta.compare
+  fn: "scope.diff(scope.bank,scope.tradbank)"
+  params: ["apy", "fees", "features"]
+:end
+
+:define meta.reviews
+  content: loadWidget('sofipay.appReviews')
+:end
+
+:define meta.stockNews
+  content: fetchNewsFeed('SOFI.NASDAQ')
+  compliance: news-audit
+:end
+
+// EMBED HTML BLOCKS FOR BROWSER WIDGETS/CONSOLE
+:embed html
+  <sofi-component scope="bank"></sofi-component>
+  <sofi-component scope="crypto"></sofi-component>
+  <sofi-component scope="payment"></sofi-component>
+  <sofi-widget type="reviews"></sofi-widget>
+  <sofi-widget type="news"></sofi-widget>
+:end
+
+// UTILITY HOOKS
+:hook onError
+  action: log('scope.error', $event)
+  if: policy.breach or exception
+:end
+
+:hook onCompliance
+  action: review('scope', $scope)
+  if: event.init or event.update
+:end

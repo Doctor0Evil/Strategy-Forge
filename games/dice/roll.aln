@@ -1,0 +1,5 @@
+<!-- HTML Dice Roller: Single Roll -->
+<button onclick="document.getElementById('dice_result').textContent = Math.floor(Math.random()*6)+1;">
+  Roll Dice
+</button>
+<span id="dice_result">0</span>

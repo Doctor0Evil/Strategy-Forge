@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advanced Betting Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1/build/global/luxon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.2.0/dist/chartjs-adapter-luxon.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #1e88e5;
+      --secondary: #26a69a;
+      --success: #43a047;
+      --warning: #fb8c00;
+      --danger: #e53935;
+      --dark: #121212;
+      --light: #f5f5f5;
+      --text: #333333;
+      --bg: #f4f4f4;
+      --card-bg: #ffffff;
+      --border: #e0e0e0;
+    }
+
+    [data-theme="dark"] {
+      --dark: #f5f5f5;
+      --light: #121212;
+      --text: #e0e0e0;
+      --bg: #1a1a1a;
+      --card-bg: #2d2d2d;
+      --border: #444444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 20px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .panel {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .panel:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    h2 {
+      color: var(--primary);
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .status-indicator {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    .status-active {
+      background-color: var(--success);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    .status-inactive {
+      background-color: var(--danger);
+    }
+
+    button {
+      padding: 10px 15px;
+      margin: 5px;
+      border: none;
+      border-radius: 6px;
+      background-color: var(--primary);
+      color: white;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    button:hover {
+      background-color: #1565c0;
+      transform: translateY(-2px);
+    }
+
+    button:disabled {
+      background-color: #90caf9;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    button.secondary {
+      background-color: var(--secondary);
+    }
+
+    button.secondary:hover {
+      background-color: #00897b;
+    }
+
+    button.danger {
+      background-color: var(--danger);
+    }
+
+    button.danger:hover {
+      background-color: #c62828;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: 500;
+    }
+
+    input[type="number"], input[type="text"], select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background-color: var(--card-bg);
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .input-group input {
+      flex: 1;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .success { color: var(--success); }
+    .warning { color: var(--warning); }
+    .danger { color: var(--danger); }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    .stat-card {
+      background-color: rgba(30, 136, 229, 0.1);
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .stat-card h3 {
+      font-size: 1.8rem;
+      margin: 5px 0;
+      color: var(--primary);
+    }
+
+    .stat-card p {
+      font-size: 0.9rem;
+      color: var(--text);
+      opacity: 0.8;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 300px;
+      width: 100%;
+    }
+
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 15px;
+    }
+
+    .tab {
+      padding: 10px 15px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .tab.active {
+      border-bottom: 2px solid var(--primary);
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 100;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section id="status_panel" class="panel">
+      <h2><i class="fas fa-chart-line"></i> Status Panel</h2>
+      <div class="tabs">
+        <div class="tab active" data-tab="auto">Auto Roll</div>
+        <div class="tab" data-tab="stats">Statistics</div>
+      </div>
+      
+      <div class="tab-content active" id="auto-tab">
+        <div id="script_output" class="status-update">System Ready</div>
+        <div class="input-group">
+          <button id="start_auto_roll" onclick="startAutoRoll()">
+            <i class="fas fa-play"></i> Start Auto Roll
+          </button>
+          <button id="stop_auto_roll" onclick="stopAutoRoll()" disabled>
+            <i class="fas fa-stop"></i> Stop Auto Roll
+          </button>
+        </div>
+        <button class="secondary" onclick="resetStats()">
+          <i class="fas fa-redo"></i> Reset Stats
+        </button>
+      </div>
+      
+      <div class="tab-content" id="stats-tab">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3 id="total-wins">0</h3>
+            <p>Total Wins</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="total-bets">0</h3>
+            <p>Total Bets</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="win-rate">0%</h3>
+            <p>Win Rate</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="profit-loss">0</h3>
+            <p>Profit/Loss</p>
+          </div>
+        </div>
+        <button class="secondary" onclick="exportData()">
+          <i class="fas fa-file-export"></i> Export Data
+        </button>
+      </div>
+    </section>
+
+    <section id="multiply_panel" class="panel">
+      <h2><i class="fas fa-calculator"></i> Multiply Panel</h2>
+      <div id="multiply_status" class="status-update"></div>
+      
+      <label for="base_bet"><i class="fas fa-coins"></i> Base Bet (BTC)</label>
+      <input type="number" id="base_bet" value="0.00000001" step="0.00000001" min="0.00000001" />
+      
+      <label for="odds"><i class="fas fa-bolt"></i> Odds</label>
+      <input type="number" id="odds" value="2.0" step="0.1" min="1.1" />
+      
+      <label for="strategy"><i class="fas fa-chess"></i> Strategy</label>
+      <select id="strategy">
+        <option value="flat">Flat Betting</option>
+        <option value="martingale">Martingale</option>
+        <option value="fibonacci">Fibonacci</option>
+      </select>
+      
+      <div class="input-group">
+        <button id="start_multiply" onclick="startMultiply()">
+          <i class="fas fa-play"></i> Start Multiply
+        </button>
+        <button id="stop_multiply" onclick="stopMultiply()" disabled>
+          <i class="fas fa-stop"></i> Stop Multiply
+        </button>
+      </div>
+      <button class="danger" onclick="emergencyStop()">
+        <i class="fas fa-exclamation-triangle"></i> Emergency Stop
+      </button>
+    </section>
+
+    <section class="panel">
+      <h2><i class="fas fa-chart-area"></i> Session Performance</h2>
+      <div class="chart-container">
+        <canvas id="myChart_last_session"></canvas>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2><i class="fas fa-chart-line"></i> Historical Performance</h2>
+      <div class="chart-container">
+        <canvas id="myChart_total"></canvas>
+      </div>
+    </section>
+
+    <section id="log_panel" class="panel">
+      <h2><i class="fas fa-clipboard-list"></i> Activity Log</h2>
+      <div id="activity_log" style="max-height: 200px; overflow-y: auto;"></div>
+      <button class="secondary" onclick="clearLog()">
+        <i class="fas fa-trash-alt"></i> Clear Log
+      </button>
+    </section>
+  </div>
+
+  <div class="theme-toggle" onclick="toggleTheme()">
+    <i class="fas fa-moon"></i>
+  </div>
+
+  <script>
+    // ======================
+    // Initialization
+    // ======================
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check for saved theme preference
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.querySelector('.theme-toggle i').className = 'fas fa-sun';
+      }
+      
+      // Initialize tabs
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+          document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+          
+          this.classList.add('active');
+          document.getElementById(`${this.dataset.tab}-tab`).classList.add('active');
+        });
+      });
+      
+      // Initialize tooltips
+      document.querySelectorAll('[data-tooltip]').forEach(el => {
+        el.addEventListener('mouseenter', showTooltip);
+        el.addEventListener('mouseleave', hideTooltip);
+      });
+      
+      // Load initial state
+      loadState();
+      updateStatsDisplay();
+      updateCharts();
+    });
+
+    // ======================
+    // State Management
+    // ======================
+    let state = {
+      wins: { btc: 0, count: 0 },
+      losses: { btc: 0, count: 0 },
+      multiply: { 
+        balance: 0, 
+        bets: 0, 
+        sessions: 0,
+        currentBet: 0,
+        currentStrategy: 'flat',
+        sequenceIndex: 0
+      },
+      sessionHistory: [],
+      totalHistory: [],
+      activityLog: []
+    };
+
+    function loadState() {
+      const savedState = getStorage('betting_state');
+      if (savedState) {
+        state = savedState;
+        logActivity('System', 'Previous session data loaded');
+      } else {
+        logActivity('System', 'New session started');
+      }
+    }
+
+    function saveState() {
+      setStorage('betting_state', state, 30);
+    }
+
+    // ======================
+    // Storage Utilities
+    // ======================
+    function setStorage(name, value, days) {
+      try {
+        // Try localStorage first
+        localStorage.setItem(name, JSON.stringify(value));
+      } catch (e) {
+        // Fallback to cookies if localStorage is full
+        console.warn('LocalStorage full, falling back to cookies');
+        let expires = '';
+        if (days) {
+          const date = new Date();
+          date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+          expires = '; expires=' + date.toUTCString();
+        }
+        document.cookie = `${name}=${encodeURIComponent(JSON.stringify(value))}${expires}; path=/`;
+      }
+    }
+
+    function getStorage(name) {
+      try {
+        // Check localStorage first
+        const localData = localStorage.getItem(name);
+        if (localData) return JSON.parse(localData);
+        
+        // Fallback to cookies
+        const nameEQ = name + '=';
+        const ca = document.cookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) === ' ') c = c.substring(1);
+          if (c.indexOf(nameEQ) === 0) {
+            return JSON.parse(decodeURIComponent(c.substring(nameEQ.length)));
+          }
+        }
+      } catch (e) {
+        console.error('Error loading state:', e);
+      }
+      return null;
+    }
+
+    // ======================
+    // UI Utilities
+    // ======================
+    function updateStatus(message, type = 'info') {
+      const output = document.getElementById('script_output');
+      output.innerHTML = `<span class="${type}">${message}</span>`;
+      logActivity('System', message);
+    }
+
+    function updateMultiplyStatus(message, type = 'info') {
+      const output = document.getElementById('multiply_status');
+      output.innerHTML = `<span class="${type}">${message}</span>`;
+      logActivity('Multiply', message);
+    }
+
+    function logActivity(source, message) {
+      const now = new Date();
+      const timestamp = formatTime(now);
+      const logEntry = `[${timestamp}] ${source}: ${message}`;
+      
+      state.activityLog.push(logEntry);
+      if (state.activityLog.length > 100) state.activityLog.shift();
+      
+      const logElement = document.getElementById('activity_log');
+      logElement.innerHTML = state.activityLog.map(entry => 
+        `<div class="log-entry">${entry}</div>`
+      ).join('');
+      logElement.scrollTop = logElement.scrollHeight;
+      
+      saveState();
+    }
+
+    function formatTime(date) {
+      return date.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      });
+    }
+
+    function formatDateTime(date) {
+      return date.toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      });
+    }
+
+    function updateStatsDisplay() {
+      document.getElementById('total-wins').textContent = state.wins.count;
+      document.getElementById('total-bets').textContent = state.wins.count + state.losses.count;
+      
+      const totalBets = state.wins.count + state.losses.count;
+      const winRate = totalBets > 0 ? Math.round((state.wins.count / totalBets) * 100) : 0;
+      document.getElementById('win-rate').textContent = `${winRate}%`;
+      
+      const profitLoss = state.wins.btc - state.losses.btc;
+      document.getElementById('profit-loss').textContent = `${profitLoss >= 0 ? '+' : ''}${profitLoss.toFixed(8)} BTC`;
+      document.getElementById('profit-loss').className = profitLoss >= 0 ? 'success' : 'danger';
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const themeToggle = document.querySelector('.theme-toggle i');
+      
+      if (html.getAttribute('data-theme') === 'dark') {
+        html.removeAttribute('data-theme');
+        themeToggle.className = 'fas fa-moon';
+        localStorage.setItem('theme', 'light');
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        themeToggle.className = 'fas fa-sun';
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+
+    // ======================
+    // Chart Configuration
+    // ======================
+    const sessionCtx = document.getElementById('myChart_last_session').getContext('2d');
+    const sessionChart = new Chart(sessionCtx, {
+      type: 'line',
+      data: {
+        datasets: [{
+          label: 'Session Balance (BTC)',
+          borderColor: '#1e88e5',
+          backgroundColor: 'rgba(30, 136, 229, 0.1)',
+          borderWidth: 2,
+          pointRadius: 3,
+          pointBackgroundColor: '#1e88e5',
+          fill: true,
+          data: []
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            type: 'time',
+            time: {
+              unit: 'minute',
+              displayFormats: {
+                minute: 'HH:mm'
+              }
+            },
+            grid: {
+              color: 'rgba(0, 0, 0, 0.1)'
+            }
+          },
+          y: {
+            beginAtZero: false,
+            grid: {
+              color: 'rgba(0, 0, 0, 0.1)'
+            },
+            ticks: {
+              callback: function(value) {
+                return value.toFixed(8) + ' BTC';
+              }
+            }
+          }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return `Balance: ${context.parsed.y.toFixed(8)} BTC`;
+              }
+            }
+          },
+          legend: {
+            labels: {
+              color: 'var(--text)'
+            }
+          }
+        },
+        interaction: {
+          mode: 'nearest',
+          axis: 'x',
+          intersect: false
+        }
+      }
+    });
+
+    const totalCtx = document.getElementById('myChart_total').getContext('2d');
+    const totalChart = new Chart(totalCtx, {
+      type: 'line',
+      data: {
+        datasets: [{
+          label: 'Total Balance (BTC)',
+          borderColor: '#26a69a',
+          backgroundColor: 'rgba(38, 166, 154, 0.1)',
+          borderWidth: 2,
+          pointRadius: 3,
+          pointBackgroundColor: '#26a69a',
+          fill: true,
+          data: []
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            type: 'time',
+            time: {
+              unit: 'day',
+              displayFormats: {
+                day: 'MMM d'
+              }
+            },
+            grid: {
+              color: 'rgba(0, 0, 0, 0.1)'
+            }
+          },
+          y: {
+            beginAtZero: false,
+            grid: {
+              color: 'rgba(0, 0, 0, 0.1)'
+            },
+            ticks: {
+              callback: function(value) {
+                return value.toFixed(8) + ' BTC';
+              }
+            }
+          }
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return `Balance: ${context.parsed.y.toFixed(8)} BTC`;
+              }
+            }
+          },
+          legend: {
+            labels: {
+              color: 'var(--text)'
+            }
+          }
+        },
+        interaction: {
+          mode: 'nearest',
+          axis: 'x',
+          intersect: false
+        }
+      }
+    });
+
+    function updateCharts() {
+      // Session chart - last 24 hours
+      const now = new Date();
+      const sessionData = state.sessionHistory.map((value, index) => ({
+        x: new Date(now.getTime() - (state.sessionHistory.length - index - 1) * 60000),
+        y: value
+      }));
+      
+      sessionChart.data.datasets[0].data = sessionData;
+      sessionChart.update();
+      
+      // Total history chart
+      const totalData = state.totalHistory.map((value, index) => ({
+        x: new Date(now.getTime() - (state.totalHistory.length - index - 1) * 86400000),
+        y: value
+      }));
+      
+      totalChart.data.datasets[0].data = totalData;
+      totalChart.update();
+    }
+
+    // ======================
+    // Game Logic
+    // ======================
+    let autoRollInterval = null;
+    let multiplyInterval = null;
+    const strategySequences = {
+      martingale: [1, 2, 4, 8, 16, 32, 64, 128],
+      fibonacci: [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+    };
+
+    function startAutoRoll() {
+      if (autoRollInterval) return;
+      
+      document.getElementById('start_auto_roll').disabled = true;
+      document.getElementById('stop_auto_roll').disabled = false;
+      
+      const minDelay = 3000; // 3 seconds
+      const maxDelay = 10000; // 10 seconds
+      
+      autoRollInterval = setInterval(() => {
+        const success = Math.random() > 0.5;
+        const timestamp = new Date();
+        const winAmount = 0.00000001; // 1 satoshi
+        
+        if (success) {
+          state.wins.btc += winAmount;
+          state.wins.count++;
+          state.sessionHistory.push(state.wins.btc - state.losses.btc);
+          updateStatus(`Roll: <span class="success">WIN +${winAmount.toFixed(8)} BTC</span> at ${formatTime(timestamp)}`, 'success');
+        } else {
+          state.losses.btc += winAmount;
+          state.losses.count++;
+          state.sessionHistory.push(state.wins.btc - state.losses.btc);
+          updateStatus(`Roll: <span class="danger">LOSE -${winAmount.toFixed(8)} BTC</span> at ${formatTime(timestamp)}`, 'danger');
+        }
+        
+        updateStatsDisplay();
+        updateCharts();
+        saveState();
+      }, randomDelay(minDelay, maxDelay));
+      
+      logActivity('Auto Roll', 'Auto Roll started');
+    }
+
+    function stopAutoRoll() {
+      if (!autoRollInterval) return;
+      
+      clearInterval(autoRollInterval);
+      autoRollInterval = null;
+      
+      document.getElementById('start_auto_roll').disabled = false;
+      document.getElementById('stop_auto_roll').disabled = true;
+      
+      updateStatus('Auto Roll stopped', 'info');
+      logActivity('Auto Roll', 'Auto Roll stopped');
+    }
+
+    function startMultiply() {
+      if (multiplyInterval) return;
+      
+      const baseBet = parseFloat(document.getElementById('base_bet').value);
+      const odds = parseFloat(document.getElementById('odds').value);
+      const strategy = document.getElementById('strategy').value;
+      
+      if (baseBet <= 0 || isNaN(baseBet)) {
+        updateMultiplyStatus('<span class="danger">Invalid base bet amount</span>', 'danger');
+        return;
+      }
+      
+      if (odds < 1.1 || isNaN(odds)) {
+        updateMultiplyStatus('<span class="danger">Odds must be at least 1.1</span>', 'danger');
+        return;
+      }
+      
+      state.multiply.currentBet = baseBet;
+      state.multiply.currentStrategy = strategy;
+      state.multiply.sequenceIndex = 0;
+      
+      document.getElementById('start_multiply').disabled = true;
+      document.getElementById('stop_multiply').disabled = false;
+      
+      const minDelay = 2000; // 2 seconds
+      const maxDelay = 5000; // 5 seconds
+      
+      multiplyInterval = setInterval(() => {
+        const win = Math.random() < (1 / odds);
+        const timestamp = new Date();
+        const betAmount = getNextBetAmount();
+        
+        if (win) {
+          const winAmount = betAmount * odds;
+          state.multiply.balance += winAmount;
+          state.wins.btc += winAmount;
+          state.wins.count++;
+          
+          // Reset sequence on win
+          state.multiply.currentBet = baseBet;
+          state.multiply.sequenceIndex = 0;
+          
+          updateMultiplyStatus(
+            `Bet: ${betAmount.toFixed(8)} BTC at ${odds.toFixed(1)}x - ` +
+            `<span class="success">WIN +${winAmount.toFixed(8)} BTC</span> at ${formatTime(timestamp)}`,
+            'success'
+          );
+        } else {
+          state.multiply.balance -= betAmount;
+          state.losses.btc += betAmount;
+          state.losses.count++;
+          
+          // Advance sequence on loss
+          if (strategy !== 'flat') {
+            state.multiply.sequenceIndex++;
+          }
+          
+          updateMultiplyStatus(
+            `Bet: ${betAmount.toFixed(8)} BTC at ${odds.toFixed(1)}x - ` +
+            `<span class="danger">LOSE -${betAmount.toFixed(8)} BTC</span> at ${formatTime(timestamp)}`,
+            'danger'
+          );
+        }
+        
+        state.multiply.bets++;
+        state.totalHistory.push(state.multiply.balance);
+        
+        updateStatsDisplay();
+        updateCharts();
+        saveState();
+      }, randomDelay(minDelay, maxDelay));
+      
+      logActivity('Multiply', `Multiply started with ${strategy} strategy`);
+    }
+
+    function getNextBetAmount() {
+      const strategy = state.multiply.currentStrategy;
+      
+      if (strategy === 'flat') {
+        return state.multiply.currentBet;
+      }
+      
+      const sequence = strategySequences[strategy];
+      if (!sequence) return state.multiply.currentBet;
+      
+      const index = Math.min(state.multiply.sequenceIndex, sequence.length - 1);
+      return state.multiply.currentBet * sequence[index];
+    }
+
+    function stopMultiply() {
+      if (!multiplyInterval) return;
+      
+      clearInterval(multiplyInterval);
+      multiplyInterval = null;
+      
+      document.getElementById('start_multiply').disabled = false;
+      document.getElementById('stop_multiply').disabled = true;
+      
+      updateMultiplyStatus('Multiply stopped', 'info');
+      logActivity('Multiply', 'Multiply stopped');
+    }
+
+    function emergencyStop() {
+      stopAutoRoll();
+      stopMultiply();
+      logActivity('System', 'Emergency stop activated');
+      updateStatus('<span class="danger">EMERGENCY STOP ACTIVATED</span>', 'danger');
+    }
+
+    function resetStats() {
+      if (autoRollInterval || multiplyInterval) {
+        updateStatus('<span class="warning">Stop all activities before resetting</span>', 'warning');
+        return;
+      }
+      
+      state = {
+        wins: { btc: 0, count: 0 },
+        losses: { btc: 0, count: 0 },
+        multiply: { 
+          balance: 0, 
+          bets: 0, 
+          sessions: 0,
+          currentBet: 0,
+          currentStrategy: 'flat',
+          sequenceIndex: 0
+        },
+        sessionHistory: [],
+        totalHistory: [],
+        activityLog: state.activityLog // Keep the log
+      };
+      
+      updateStatus('All stats reset to zero', 'info');
+      updateMultiplyStatus('', 'info');
+      updateStatsDisplay();
+      updateCharts();
+      saveState();
+      
+      logActivity('System', 'All statistics reset');
+    }
+
+    function clearLog() {
+      state.activityLog = [];
+      document.getElementById('activity_log').innerHTML = '';
+      logActivity('System', 'Activity log cleared');
+    }
+
+    function exportData() {
+      const dataStr = JSON.stringify(state, null, 2);
+      const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+      
+      const exportName = 'betting_data_' + new Date().toISOString().slice(0, 10) + '.json';
+      
+      const linkElement = document.createElement('a');
+      linkElement.setAttribute('href', dataUri);
+      linkElement.setAttribute('download', exportName);
+      linkElement.click();
+      
+      logActivity('System', 'Data exported to JSON file');
+    }
+
+    // ======================
+    // Utility Functions
+    // ======================
+    function randomDelay(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function showTooltip(event) {
+      // Tooltip implementation would go here
+    }
+
+    function hideTooltip() {
+      // Tooltip implementation would go here
+    }
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat_BTC</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+  <script src="/assets/chart.min.js"></script>
+</head>
+<body>
+  <div id="chat-btc" class="container">
+    <!-- Header -->
+    <div class="header">
+      <h2>Chat_BTC</h2>
+      <p>Balance: <span id="balance">0</span> satoshis | CHAT-AI: <span id="fun-tokens">0</span></p>
+    </div>
+
+    <!-- Mega Menu -->
+    <div class="mega-menu">
+      <div class="menu-item" data-submenu="games"><i class="fas fa-gamepad"></i> Games</div>
+      <div class="menu-item" data-submenu="dao"><i class="fas fa-landmark"></i> DAO</div>
+      <div class="menu-item" data-submenu="ai"><i class="fas fa-robot"></i> AI Tools</div>
+      <div class="menu-item" data-submenu="wallet"><i class="fas fa-wallet"></i> Wallet</div>
+      <div class="menu-item" data-submenu="social"><i class="fas fa-users"></i> Social</div>
+    </div>
+
+    <!-- Submenu Panels -->
+    <div class="submenu-panel" id="games-submenu">
+      <h3>Game Modes</h3>
+      <div class="game-grid">
+        <div class="game-card" data-game="dice">
+          <i class="fas fa-dice"></i> Dice
+          <p>Provably fair dice game</p>
+        </div>
+        <div class="game-card" data-game="multiply">
+          <i class="fas fa-times"></i> Multiply
+          <p>High-risk, high-reward betting</p>
+        </div>
+      </div>
+    </div>
+    <div class="submenu-panel" id="dao-submenu">
+      <h3>DAO Governance</h3>
+      <button data-action="vote"><i class="fas fa-vote-yea"></i> Vote</button>
+      <button data-action="propose"><i class="fas fa-edit"></i> Propose</button>
+    </div>
+    <div class="submenu-panel" id="ai-submenu">
+      <h3>AI Tools</h3>
+      <button data-action="ai-help"><i class="fas fa-robot"></i> AI Assistant</button>
+    </div>
+
+    <!-- Game Content -->
+    <div class="game-content">
+      <div id="dice-game" class="game-panel active">
+        <input type="range" id="risk-slider" min="1" max="10" value="5">
+        <span id="risk-value">5x</span>
+        <button id="roll-button">Roll Dice</button>
+        <div id="dice-result"></div>
+      </div>
+      <div id="multiply-game" class="game-panel">
+        <input type="number" id="bet-amount" min="1" value="10">
+        <button id="multiply-button">Try 2x</button>
+        <div id="multiply-result"></div>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="graphs">
+      <canvas id="myChart_last_session"></canvas>
+      <canvas id="myChart_total"></canvas>
+    </div>
+
+    <!-- Free Claim -->
+    <div class="faucet-claim">
+      <h4><i class="fas fa-faucet"></i> Free Hourly Claim</h4>
+      <p>Streak: <span id="claim-streak">0</span> days</p>
+      <button id="claim-button" disabled>Claim in <span id="claim-timer">60:00</span></button>
+      <p id="claim-message"></p>
+    </div>
+
+    <!-- Support Chat -->
+    <div class="support-chat">
+      <div class="chat-header">AI Support <button class="close-chat">×</button></div>
+      <div class="chat-messages"></div>
+      <div class="chat-input">
+        <input type="text" placeholder="Ask a question...">
+        <button class="send-btn"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+      <div class="nav-item" data-target="games"><i class="fas fa-gamepad"></i> Games</div>
+      <div class="nav-item" data-target="wallet"><i class="fas fa-wallet"></i> Wallet</div>
+      <div class="nav-item central-action"><i class="fas fa-plus"></i></div>
+      <div class="nav-item" data-target="social"><i class="fas fa-users"></i> Social</div>
+      <div class="nav-item" data-target="menu"><i class="fas fa-bars"></i> Menu</div>
+    </div>
+    <div class="action-menu">
+      <div class="action-item" data-action="claim"><i class="fas fa-faucet"></i> Claim</div>
+      <div class="action-item" data-action="deposit"><i class="fas fa-arrow-down"></i> Deposit</div>
+    </div>
+  </div>
+
+  <script src="Controls/AI_Assist_Nav_Ctrls.js"></script>
+  <script src="Controls/Kybd_Shrtc_Sys.js"></script>
+  <script src="Controls/Menu_Nav_Sys.js"></script>
+  <script src="Home/Integrated_Support_System.js"></script>
+  <script src="Games/DiceGame.js"></script>
+  <script src="Games/MultiplyGame.js"></script>
+  <script src="Games/Charts.js"></script>
+</body>
+</html>

@@ -1,21 +1,65 @@
-MIT License
+FILE: LICENSE
+NAME: Strategy‑Forge Permissive License v1.0
+YEAR: 2025
+COPYRIGHT HOLDER: Doctor0Evil
 
 Copyright (c) 2025 Doctor0Evil
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to use,
+copy, modify, merge, publish, distribute, and sublicense the Software, including
+for commercial purposes in gaming, simulation, and cryptocurrency/crypto‑asset
+markets, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+1. Attribution
+   The above copyright notice, this license text, and a notice identifying
+   “Strategy‑Forge” as the originating project must be included in all copies
+   or substantial portions of the Software and in any associated documentation
+   or “About/Credits” view where such views exist.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+2. No endorsement
+   Use of the name “Strategy‑Forge”, “Doctor0Evil”, or any associated marks
+   must not be used to endorse or promote derived products, services, token
+   offerings, or financial instruments without prior written permission.
+
+3. Regulatory and risk responsibility
+   Any party using the Software in connection with gaming, wagering, trading,
+   market‑making, token issuance, or other financial or crypto‑asset activity
+   is solely responsible for:
+   - Complying with all applicable laws and regulations in all relevant
+     jurisdictions, including but not limited to securities, derivatives,
+     gambling, anti‑money‑laundering, consumer protection, and data protection
+     regimes.
+   - Implementing appropriate technical, operational, and organizational
+     controls for security, risk management, and user protection.
+   - Clearly disclosing to end‑users that outputs of the Software or derived
+     works do not constitute financial, investment, legal, or tax advice.
+
+4. No warranty; no financial advice
+   THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE, NON‑INFRINGEMENT, SECURITY, OR
+   REGULATORY COMPLIANCE. WITHOUT LIMITING THE FOREGOING, THE AUTHORS AND
+   COPYRIGHT HOLDERS DO NOT WARRANT THAT USE OF THE SOFTWARE IS SUITABLE FOR
+   ANY PARTICULAR GAMING, WAGERING, OR FINANCIAL/CRYPTOCURRENCY‑MARKET USE
+   CASE, OR THAT IT WILL MEET ANY REGULATORY OR RISK‑MANAGEMENT REQUIREMENTS.
+
+   NO OUTPUT OR BEHAVIOR OF THE SOFTWARE, WHETHER STANDALONE OR IN COMBINATION
+   WITH OTHER SYSTEMS, SHALL BE INTERPRETED AS FINANCIAL, INVESTMENT, LEGAL,
+   OR TAX ADVICE.
+
+5. Limitation of liability
+   IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+   DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR
+   OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE
+   USE OF OR OTHER DEALINGS IN THE SOFTWARE, INCLUDING BUT NOT LIMITED TO:
+   - TRADING LOSSES, LOST PROFITS, LOST DATA, BUSINESS INTERRUPTION, MARKET
+     IMPACT, OR ANY INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES,
+   - LOSSES OR DAMAGES ARISING FROM GAMBLING OR WAGERING ACTIVITIES,
+   - LOSSES OR DAMAGES ARISING FROM CRYPTOCURRENCY, TOKEN, OR DIGITAL‑ASSET
+     ACTIVITIES, INCLUDING BUT NOT LIMITED TO PRICE VOLATILITY, SMART‑CONTRACT
+     FAILURES, PROTOCOL FAILURES, OR REGULATORY ACTIONS.
+
+By using, copying, modifying, or distributing the Software, you accept this
+license in full. If you do not accept this license, you are not permitted to
+use the Software.

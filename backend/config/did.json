@@ -1,0 +1,31 @@
+{
+  "id": "did:ion:EiD8J2b3K8k9Q8x9L7m2n4p1q5r6s7t8u9v0w1x2y3z4A5B6C7D8E9F0",
+  "verificationMethod": [
+    {
+      "id": "did:ion:EiD8J2b3K8k9Q8x9L7m2n4p1q5r6s7t8u9v0w1x2y3z4A5B6C7D8E9F0#keys-1",
+      "type": "JsonWebKey2020",
+      "controller": "did:ion:EiD8J2b3K8k9Q8x9L7m2n4p1q5r6s7t8u9v0w1x2y3z4A5B6C7D8E9F0",
+      "publicKeyJwk": {
+        "kty": "EC",
+        "crv": "P-256",
+        "x": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "y": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+      }
+    }
+  ],
+  "authentication": [
+    "did:ion:EiD8J2b3K8k9Q8x9L7m2n4p1q5r6s7t8u9v0w1x2y3z4A5B6C7D8E9F0#keys-1"
+  ],
+  "service": [
+    {
+      "id": "#game-backend",
+      "type": "StrategyForgeGameService",
+      "serviceEndpoint": "https://strategyforge.example/api/v1/game"
+    },
+    {
+      "id": "#rag-service",
+      "type": "StrategyForgeRAGService",
+      "serviceEndpoint": "https://strategyforge.example/rag/embed"
+    }
+  ]
+}

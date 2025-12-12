@@ -1,0 +1,28 @@
+alertmanager:
+  enabled: true
+
+server:
+  retention: 15d
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "512Mi"
+    limits:
+      cpu: "2"
+      memory: "4Gi"
+
+  extraScrapeConfigs: |
+    - job_name: 'strategyforge-php-api'
+      kubernetes_sd_configs:
+        - role: pod
+      relabel_configs:
+        - source_labels: [__meta_kubernetes_pod_label_app]
+          action: keep
+          regex: php-api
+    - job_name: 'strategyforge-rag-service'
+      kubernetes_sd_configs:
+        - role: pod
+      relabel_configs:
+        - source_labels: [__meta_kubernetes_pod_label_app]
+          action: keep
+          regex: rag-service

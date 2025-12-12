@@ -1,0 +1,121 @@
+<bci_sampler
+    id="xrphone-bci-sampler"
+    mode="clinical_realtime"
+    safe="true"
+    compliant="ISO13485,IEC62304,GDPR,CCPA,Bit.Hub,Perplexity.Labs"
+    iteration="continuous"
+    environments="mobile_xr,edge_gateway"
+>
+    <hardware_profile
+        xr_phone_chipset="MT6883_Dimensity_1000"
+        process_nm="7"
+        cpu_layout="4xCortex-A77,4xCortex-A55"
+        neuromorphic_adapter="bio_nano_bridge_v1"
+        biodegradable_module="polylactic_acid_substrate+MgZn_conductive_traces"
+        headmount_model="Galea-Varjo-Aero"
+        eeg_channels="16"
+        sample_rate_hz="250"
+        biosignals="EEG,EMG,EOG,PPG,EDA"
+    />
+
+    <channel_map
+        eeg="EEG0..EEG9"
+        emg="EMG0..EMG3"
+        eog="EOG0..EOG1"
+        ppg="PPG0..PPG1"
+        eda="EDA0"
+    />
+
+    <!-- Acquisition window and neuromorphic timing constraints -->
+    <acquisition_params
+        window_ms="1000"
+        overlap_ms="200"
+        max_jitter_ms="10"
+        max_packet_loss_pct="2.0"
+        max_latency_ms="60.0"
+    />
+
+    <!-- Biodegradable cybernetic chipset module constraints -->
+    <biochip_safety
+        substrate_materials="PLA,PLGA"
+        conductive_materials="Mg,Fe,Zn,transient_polymer_composites"
+        max_joule_heating_mW="5.0"
+        max_surface_temp_c="40.0"
+        iso_cytotoxicity="ISO10993-5:pass"
+        iso_sensitivity="ISO10993-10:pass"
+        degradation_profile_days="30"
+        immune_activation_score_max="0.2"
+    />
+
+    <!-- Natural neuromorphic user constraints (no stimulation, read-only) -->
+    <neuromorphic_constraints
+        interface_mode="read_only"
+        bci_output_mode="decoded_intent_only"
+        no_closed_loop_stimulation="true"
+        explainable_ai_only="true"
+        mapping="EEG_features->XR_gaze,gesture,intent"
+    />
+
+    <!-- Sampling pipeline steps -->
+    <pipeline
+        steps="timestamp_align,notch_filter,bandpass_filter,artifact_reject,feature_extract,metrics_export"
+    />
+
+    <step id="timestamp_align">
+        <description>Align device and PC/XR timestamps; compute drift and correct.</description>
+        <inputs>raw_eeg,raw_timestamps</inputs>
+        <outputs>aligned_eeg,aligned_timestamps</outputs>
+        <max_drift_ms>5.0</max_drift_ms>
+    </step>
+
+    <step id="notch_filter">
+        <description>50/60 Hz line-noise removal.</description>
+        <inputs>aligned_eeg</inputs>
+        <outputs>notched_eeg</outputs>
+        <params>
+            <notch_freq_hz>60.0</notch_freq_hz>
+            <q_factor>30.0</q_factor>
+        </params>
+    </step>
+
+    <step id="bandpass_filter">
+        <description>Band-pass EEG 1–40 Hz for cognitive/BCI use.</description>
+        <inputs>notched_eeg</inputs>
+        <outputs>bp_eeg</outputs>
+        <params>
+            <low_cut_hz>1.0</low_cut_hz>
+            <high_cut_hz>40.0</high_cut_hz>
+            <filter_order>4</filter_order>
+        </params>
+    </step>
+
+    <step id="artifact_reject">
+        <description>Remove segments with high EMG/EOG contamination.</description>
+        <inputs>bp_eeg,EMG0..EMG3,EOG0..EOG1</inputs>
+        <outputs>clean_eeg</outputs>
+        <params>
+            <eeg_amp_threshold_uV>100.0</eeg_amp_threshold_uV>
+            <emg_band_hz>40.0..100.0</emg_band_hz>
+            <eog_correlation_threshold>0.7</eog_correlation_threshold>
+        </params>
+    </step>
+
+    <step id="feature_extract">
+        <description>Extract band powers and engagement indices.</description>
+        <inputs>clean_eeg</inputs>
+        <outputs>eeg_features</outputs>
+        <params>
+            <bands>delta:1-4,theta:4-8,alpha:8-13,beta:13-30,gamma:30-40</bands>
+        </params>
+    </step>
+
+    <step id="metrics_export">
+        <description>Export quality metrics for XR-phone dashboards.</description>
+        <inputs>clean_eeg,eeg_features</inputs>
+        <outputs>sampler_metrics</outputs>
+        <params>
+            <compute>snr_db,artifact_rate_pct,median_latency_ms,p99_latency_ms</compute>
+            <export_cadence_ms>1000</export_cadence_ms>
+        </params>
+    </step>
+</bci_sampler>

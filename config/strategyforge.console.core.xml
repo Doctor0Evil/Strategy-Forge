@@ -1,0 +1,384 @@
+<!-- FILE: config/strategyforge.console.core.xml -->
+<strategyforge
+    version="1.0"
+    subsystem="console-core"
+    security="ALN-STRICT"
+    execPolicy="content-execution"
+    evolution="persistent"
+    authorizer="StrategyForge.Governance"
+    xmlns="https://strategyforge.io/schema/console-core"
+>
+
+  <meta>
+    <contentSecurityPolicy>
+      default-src 'self';
+      script-src 'self';
+      object-src 'none';
+      base-uri 'self';
+      frame-ancestors 'none';
+      require-trusted-types-for 'script';
+    </contentSecurityPolicy>
+  </meta>
+
+  <!-- ////////////////////////////////////////////////////////////
+       MODULE 001: STRATEGY-FORGE CONSOLE CORE
+       //////////////////////////////////////////////////////////// -->
+  <module id="Console.Core" scope="global">
+    <constants>
+      <constant name="CONSOLE_PROMPT_STRING" encoding="ASCII_HEX">
+        73 46 2d 63 6f 6e 73 6f 6c 65 23 3e 3e 20
+        <!-- "sF-console#>> " -->
+      </constant>
+      <constant name="WELCOME_BANNER" encoding="ASCII_HEX">
+        57 65 6c 63 6f 6d 65 20 74 6f 20 53 74 72 61 74 65 67 79 2d 46 6f 72 67 65 2e 20
+        43 6f 6d 70 6c 69 61 6e 63 65 20 63 6f 72 65 20 61 63 74 69 76 65 2e
+        <!-- "Welcome to Strategy-Forge. Compliance core active." -->
+      </constant>
+    </constants>
+
+    <function name="initialize_console" visibility="public">
+      <description>
+        Initialize Strategy‑Forge console, print banner, and enter main input loop.
+      </description>
+      <entryPoint>true</entryPoint>
+      <logic>
+        <print valueRef="WELCOME_BANNER"/>
+        <call function="Console.Core.InputLoop"/>
+      </logic>
+    </function>
+
+    <function name="Console.Core.InputLoop" visibility="internal">
+      <description>
+        Read user input, sanitize, parse, and dispatch to command handlers.
+      </description>
+      <logic loopCondition="session.active == true">
+        <print valueRef="CONSOLE_PROMPT_STRING"/>
+        <let name="rawInput" expr="System.IO.ReadLine()"/>
+        <let name="safeInput" expr="Compliance.Engine.sanitize(rawInput)"/>
+        <let name="command" expr="Console.Parser.parseCommand(safeInput)"/>
+        <call function="Console.Dispatcher.dispatch" params="command"/>
+      </logic>
+    </function>
+  </module>
+
+  <!-- ////////////////////////////////////////////////////////////
+       MODULE 002: CONSOLE PARSER & DISPATCHER
+       //////////////////////////////////////////////////////////// -->
+  <module id="Console.Parser" scope="utility">
+    <function name="parseCommand" visibility="public">
+      <params>
+        <param name="rawInput" type="String"/>
+      </params>
+      <returns type="Command"/>
+      <logic>
+        <let name="tokens" expr="Ascii.encode.tokenize(rawInput, ' ')"/>
+        <struct name="Command">
+          <field name="executable" expr="tokens[0]"/>
+          <field name="args"        expr="tokens.slice(1)"/>
+          <field name="raw"         expr="rawInput"/>
+          <field name="timestamp"   expr="System.Time.now()"/>
+        </struct>
+        <return expr="Command"/>
+      </logic>
+    </function>
+  </module>
+
+  <module id="Console.Dispatcher" scope="utility">
+    <function name="dispatch" visibility="public">
+      <params>
+        <param name="command" type="Command"/>
+      </params>
+      <logic>
+        <call function="Compliance.Engine.log"
+              params="concat('Executing command: ', command.raw)"/>
+
+        <switch expr="command.executable">
+          <case value="help">
+            <call function="Console.Help.show"/>
+          </case>
+          <case value="calculate">
+            <call function="Math.Engine.execute" params="command.args"/>
+          </case>
+          <case value="bridge_web5">
+            <call function="Web5.Bridge.manage" params="command.args"/>
+          </case>
+          <case value="govern">
+            <call function="AI.Swarm.route" params="command.args"/>
+          </case>
+          <case value="sandbox_model">
+            <call function="Model.Sandbox.query" params="command.args"/>
+          </case>
+          <case value="draw_ascii">
+            <call function="Ascii.encode.generateArt" params="command.args"/>
+          </case>
+          <default>
+            <print value="Error: Command not recognized. Type 'help' for commands."/>
+          </default>
+        </switch>
+      </logic>
+    </function>
+  </module>
+
+  <!-- ////////////////////////////////////////////////////////////
+       MODULE 003: ASCII ENCODE ENGINE
+       //////////////////////////////////////////////////////////// -->
+  <module id="Ascii.encode" scope="utility">
+    <function name="tokenize" visibility="public">
+      <description>Split string by delimiter into tokens.</description>
+      <params>
+        <param name="input" type="String"/>
+        <param name="delimiter" type="Char"/>
+      </params>
+      <returns type="Array"/>
+    </function>
+
+    <function name="toString" visibility="public">
+      <description>Serialize structured data to ASCII string.</description>
+      <params>
+        <param name="data" type="Any"/>
+      </params>
+      <returns type="String"/>
+    </function>
+
+    <function name="fromString" visibility="public">
+      <description>Deserialize ASCII string into structured data.</description>
+      <params>
+        <param name="asciiData" type="String"/>
+      </params>
+      <returns type="Any"/>
+    </function>
+
+    <function name="generateArt" visibility="public">
+      <params>
+        <param name="args" type="Array"/>
+      </params>
+      <logic>
+        <let name="artName" expr="args[0]"/>
+        <switch expr="artName">
+          <case value="strategyforge_logo">
+            <print valueRef="ASCII_ART_STRATEGYFORGE_LOGO"/>
+          </case>
+          <default>
+            <print value="Error: ASCII art not found."/>
+          </default>
+        </switch>
+      </logic>
+    </function>
+
+    <constant name="ASCII_ART_STRATEGYFORGE_LOGO" encoding="RAW_ASCII"><![CDATA[
+   _____ _             _              ______             
+  / ____| |           | |            |  ___|            
+ | (___ | |_ __ _ _ __| |_ _   _  ___| |_ _ __ ___  ___ 
+  \___ \| __/ _` | '__| __| | | |/ _ \  _| '__/ _ \/ _ \
+  ____) | || (_| | |  | |_| |_| |  __/ | | | |  __/  __/
+ |_____/ \__\__,_|_|   \__|\__,_|\___\_| |_|  \___|\___|
+    ]]></constant>
+  </module>
+
+  <!-- ////////////////////////////////////////////////////////////
+       MODULE 004: PRECISION MATH ENGINE
+       //////////////////////////////////////////////////////////// -->
+  <module id="Math.Engine" scope="risk">
+    <function name="execute" visibility="public">
+      <params>
+        <param name="args" type="Array"/>
+      </params>
+      <logic>
+        <let name="func"  expr="args[0]"/>
+        <let name="mArgs" expr="args.slice(1)"/>
+
+        <call function="Compliance.Engine.log"
+              params="concat('Executing math function: ', func)"/>
+
+        <switch expr="func">
+          <case value="pipeline_integrity">
+            <let name="r" expr="Math.Engine.pipelineIntegrity(mArgs)"/>
+            <print valueExpr="concat('Pipeline Integrity: ', r)"/>
+          </case>
+          <case value="leverage_risk">
+            <let name="r" expr="Math.Engine.leverageRisk(mArgs)"/>
+            <print valueExpr="concat('Leverage Risk Score: ', r)"/>
+          </case>
+          <default>
+            <print value="Error: Math function not recognized."/>
+          </default>
+        </switch>
+      </logic>
+    </function>
+
+    <function name="pipelineIntegrity" visibility="internal">
+      <description>
+        Compute stability factor based on throughput, latency, and error rate.
+      </description>
+      <params>
+        <param name="args" type="Array"/>
+      </params>
+      <returns type="Float"/>
+    </function>
+
+    <function name="leverageRisk" visibility="internal">
+      <description>
+        Compute a normalized leverage‑risk score for asset transitions.
+      </description>
+      <params>
+        <param name="args" type="Array"/>
+      </params>
+      <returns type="Float"/>
+    </function>
+  </module>
+
+  <!-- ////////////////////////////////////////////////////////////
+       MODULE 005: WEB5 BRIDGE (ABSTRACT)
+       //////////////////////////////////////////////////////////// -->
+  <module id="Web5.Bridge" scope="infrastructure">
+    <function name="manage" visibility="public">
+      <params>
+        <param name="args" type="Array"/>
+      </params>
+      <logic>
+        <let name="sub" expr="args[0]"/>
+        <call function="Compliance.Engine.log"
+              params="concat('Web5 bridge command: ', sub)"/>
+
+        <switch expr="sub">
+          <case value="start_transition">
+            <call function="Web5.Bridge.startTransition" params="args.slice(1)"/>
+          </case>
+          <case value="status">
+            <call function="Web5.Bridge.status" params="args.slice(1)"/>
+          </case>
+          <default>
+            <print value="Error: Web5 bridge subcommand not recognized."/>
+          </default>
+        </switch>
+      </logic>
+    </function>
+
+    <function name="startTransition" visibility="internal">
+      <params>
+        <param name="opts" type="Array"/>
+      </params>
+    </function>
+
+    <function name="status" visibility="internal">
+      <params>
+        <param name="opts" type="Array"/>
+      </params>
+    </function>
+  </module>
+
+  <!-- ////////////////////////////////////////////////////////////
+       MODULE 006: INTER-AI SWARM GOVERNANCE
+       //////////////////////////////////////////////////////////// -->
+  <module id="AI.Swarm" scope="governance">
+    <function name="route" visibility="public">
+      <description>Route governance queries to configured AI backends.</description>
+      <params>
+        <param name="args" type="Array"/>
+      </params>
+      <logic>
+        <let name="target" expr="args[0]"/>
+        <let name="query"  expr="args.slice(1).join(' ')"/>
+
+        <call function="Compliance.Engine.log"
+              params="concat('Routing governance query to ', target)"/>
+
+        <switch expr="target">
+          <case value="strategyforge">
+            <call function="AI.Adapter.StrategyForge.query" params="query"/>
+          </case>
+          <case value="external">
+            <call function="AI.Adapter.External.query" params="query"/>
+          </case>
+          <default>
+            <print value="Error: Target AI backend not supported."/>
+          </default>
+        </switch>
+      </logic>
+    </function>
+  </module>
+
+  <!-- ////////////////////////////////////////////////////////////
+       MODULE 007: MODEL SANDBOX (HIGH-RISK)
+       //////////////////////////////////////////////////////////// -->
+  <module id="Model.Sandbox" scope="high-risk">
+    <constant name="SANDBOX_WARNING" encoding="RAW_ASCII">
+      ENTERING SANDBOX. ALL OPERATIONS UNDER STRICT COMPLIANCE REVIEW.
+    </constant>
+
+    <function name="query" visibility="public">
+      <params>
+        <param name="args" type="Array"/>
+      </params>
+      <logic>
+        <print valueRef="SANDBOX_WARNING"/>
+        <let name="rawQuery" expr="args.join(' ')"/>
+
+        <let name="preCheck" expr="Model.Sandbox.analyzeQuery(rawQuery)"/>
+        <if condition="preCheck.safe == false">
+          <call function="Compliance.Engine.quarantine"
+                params="preCheck.reason"/>
+          <return/>
+        </if>
+
+        <let name="resp" expr="Model.Sandbox.executeIsolated(rawQuery)"/>
+        <let name="post" expr="Compliance.Engine.analyzeResponse(resp)"/>
+
+        <if condition="post.compliant == true">
+          <print valueExpr="concat('Sandbox Response: ', resp)"/>
+        </if>
+        <else>
+          <print value="Sandbox response quarantined due to compliance failure."/>
+          <call function="Compliance.Engine.log"
+                params="concat('Sandbox quarantine: ', post.reason)"/>
+        </else>
+      </logic>
+    </function>
+
+    <function name="analyzeQuery" visibility="internal">
+      <params>
+        <param name="query" type="String"/>
+      </params>
+      <returns type="Struct"/>
+    </function>
+
+    <function name="executeIsolated" visibility="internal">
+      <params>
+        <param name="query" type="String"/>
+      </params>
+      <returns type="String"/>
+    </function>
+  </module>
+
+  <!-- ////////////////////////////////////////////////////////////
+       MODULE 008: COMPLIANCE ENGINE
+       //////////////////////////////////////////////////////////// -->
+  <module id="Compliance.Engine" scope="system">
+    <function name="log" visibility="public">
+      <params>
+        <param name="message" type="String"/>
+      </params>
+    </function>
+
+    <function name="sanitize" visibility="public">
+      <params>
+        <param name="input" type="String"/>
+      </params>
+      <returns type="String"/>
+    </function>
+
+    <function name="quarantine" visibility="public">
+      <params>
+        <param name="reason" type="String"/>
+      </params>
+    </function>
+
+    <function name="analyzeResponse" visibility="public">
+      <params>
+        <param name="response" type="String"/>
+      </params>
+      <returns type="Struct"/>
+    </function>
+  </module>
+
+</strategyforge>

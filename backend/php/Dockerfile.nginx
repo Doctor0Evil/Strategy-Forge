@@ -1,0 +1,13 @@
+FROM nginx:alpine
+
+WORKDIR /usr/share/nginx/html
+
+COPY ../../frontend/dist/ ./        # built React bundle
+COPY ../../frontend/public/game_widget.html ./game_widget.html
+COPY ../../godot/dist/ ./godot/dist/
+
+COPY nginx.conf /etc/nginx/nginx.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

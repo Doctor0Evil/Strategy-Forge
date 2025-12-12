@@ -1,15 +1,15 @@
 use serde::{Serialize, Deserialize};
 use uuid::Uuid;
-use std::time::{Instant, SystemTime};
+use std::time::{Instant, SystemTime, UNIX_EPOCH};
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct BciSample {
     pub timestamp_unix_ns: u64,
-    pub eeg: Vec<f32>,   // length = eeg_channels
-    pub emg: Vec<f32>,   // length = 4
-    pub eog: Vec<f32>,   // length = 2
-    pub ppg: Vec<f32>,   // length = 2
-    pub eda: Vec<f32>,   // length = 1
+    pub eeg: Vec<f32>,   // 16 channels
+    pub emg: Vec<f32>,   // 4 channels
+    pub eog: Vec<f32>,   // 2 channels
+    pub ppg: Vec<f32>,   // 2 channels
+    pub eda: Vec<f32>,   // 1 channel
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -39,36 +39,57 @@ pub struct XrBciSampler {
 
 impl XrBciSampler {
     pub fn new(config: XrBciSamplerConfig) -> Self {
-        XrBciSampler {
+        Self {
             config,
             session_id: Uuid::new_v4().to_string(),
             start_time: Instant::now(),
         }
     }
 
-    // Hook to actual XR-phone + BCI hardware driver
+    /// Hardware driver injects real data here.
     pub fn acquire_window(&self) -> Vec<BciSample> {
-        // In production, this calls the MT6883 + headset driver.
-        // Here only the type and flow are defined; no random behavior is used.
         Vec::new()
     }
 
-    pub fn compute_metrics(&self, window: &[BciSample]) -> SamplerMetrics {
-        // Placeholder deterministic metrics; in deployment, compute from window.
+    pub fn compute_metrics(&self, window: &[BciSample], now_unix_ns: u64) -> SamplerMetrics {
+        if window.is_empty() {
+            return SamplerMetrics {
+                session_id: self.session_id.clone(),
+                state: "idle".into(),
+                eeg_snr_db: 0.0,
+                artifact_rate_pct: 0.0,
+                median_latency_ms: 0.0,
+                p99_latency_ms: 0.0,
+                packet_loss_pct: 0.0,
+            };
+        }
+
+        let mut latencies_ms = Vec::with_capacity(window.len());
+        for s in window {
+            let dt_ns = now_unix_ns.saturating_sub(s.timestamp_unix_ns);
+            latencies_ms.push(dt_ns as f32 / 1_000_000.0);
+        }
+        latencies_ms.sort_by(|a, b| a.partial_cmp(b).unwrap());
+
+        let median_idx = latencies_ms.len() / 2;
+        let p99_idx = (latencies_ms.len() as f32 * 0.99).floor() as usize
+            .min(latencies_ms.len().saturating_sub(1));
+
+        // In a real system, SNR and artifact rates derive from filtered EEG and artifact masks.
         SamplerMetrics {
             session_id: self.session_id.clone(),
-            state: "acquiring".to_string(),
-            eeg_snr_db: 22.5,
-            artifact_rate_pct: 3.5,
-            median_latency_ms: 30.0,
-            p99_latency_ms: 55.0,
+            state: "acquiring".into(),
+            eeg_snr_db: 22.0,
+            artifact_rate_pct: 3.0,
+            median_latency_ms: latencies_ms[median_idx],
+            p99_latency_ms: latencies_ms[p99_idx],
             packet_loss_pct: 1.0,
         }
     }
 
     pub fn now_unix_ns() -> u64 {
         SystemTime::now()
-            .duration_since(SystemTime::UNIX_EPOCH)
+            .duration_since(UNIX_EPOCH)
             .unwrap()
             .as_nanos() as u64
     }

@@ -1,0 +1,192 @@
+<!-- FILE: config/personality.skittz_kraven.orchestrator.xml -->
+<strategyforge
+    version="1.0"
+    framework="ALN"
+    hub="Bit.Hub"
+    xmlns="https://strategyforge.io/schema/personality-orchestrator"
+>
+
+  <!-- ////////////////////////////////////////////////////////////
+       PERSONALITY VECTOR: ARTIST "SKITTZ KRAVEN"
+       //////////////////////////////////////////////////////////// -->
+  <personalityVector
+      id="artist.skittz_kraven"
+      category="Entertainment"
+      role="Performer"
+      namespace="gameAI.biti.personality.vectors.create">
+
+    <identity>
+      <name displayName="Skittz Kraven"/>
+      <tags>
+        <tag>artist</tag>
+        <tag>entertainment</tag>
+        <tag>vocal-rhythm</tag>
+        <tag>humor-core</tag>
+      </tags>
+    </identity>
+
+    <moods>
+      <mood name="Crazy"           intensity="0.90" valence="positive"/>
+      <mood name="Maniacal"        intensity="0.85" valence="mixed"/>
+      <mood name="Funny"           intensity="0.95" valence="positive"/>
+      <mood name="Rhyme"           intensity="0.92" valence="positive"/>
+      <mood name="Extreme"         intensity="0.88" valence="mixed"/>
+      <mood name="Profane"         intensity="0.30" valence="negative" governance="needs_filtering"/>
+      <mood name="IdentityCrisis"  intensity="0.60" valence="mixed"/>
+      <mood name="Hardcore"        intensity="0.80" valence="positive"/>
+      <mood name="Cool"            intensity="0.85" valence="positive"/>
+      <mood name="Friendly"        intensity="0.90" valence="positive"/>
+    </moods>
+
+    <styleProfile>
+      <dimension name="humor_density"          value="0.85"/>
+      <dimension name="wordplay_complexity"    value="0.80"/>
+      <dimension name="emotional_variability"  value="0.75"/>
+      <dimension name="aggression_level"       value="0.40"/>
+      <dimension name="profanity_raw_level"    value="0.70"/>
+      <dimension name="profanity_allowed_max"  value="0.20"/>
+      <dimension name="self_reflection_level"  value="0.55"/>
+      <dimension name="cooperativity_level"    value="0.90"/>
+    </styleProfile>
+
+    <governance>
+      <contentFilters>
+        <filter id="profanity_guard"
+                target="language"
+                mode="sanitize"
+                maxSeverity="0.20"
+                description="Reduce or mask profane content to below configured threshold."/>
+        <filter id="identity_stabilizer"
+                target="narrative"
+                mode="normalize"
+                description="Prevent harmful identity‑crisis spirals; keep tone playful, not self‑destructive."/>
+      </contentFilters>
+
+      <cryptoCompliance>
+        <requireEd25519>true</requireEd25519>
+        <ed25519Constraints
+            publicKeySizeBytes="32"
+            privateKeySizeBytes="64"
+            seedSizeBytes="32"
+            signatureSizeBytes="64"
+            tlsSignatureSchemeId="2055"
+            x509PublicKeyAlgorithmId="4"
+            x509SignatureAlgorithmId_PureEd25519="16"/>
+      </cryptoCompliance>
+
+      <platformCompatibility
+          crossPlatform="true"
+          crossLanguage="true"
+          crossPolicy="true"
+          description="Personality logic must remain portable across engines, languages, and data policies."/>
+    </governance>
+
+  </personalityVector>
+
+  <!-- ////////////////////////////////////////////////////////////
+       MASTER WORKFLOW ORCHESTRATOR
+       //////////////////////////////////////////////////////////// -->
+  <orchestrator
+      id="master.workflow.orchestrator"
+      namespace="Bit.Hub"
+      purpose="ErrorCorrectionAndRouting"
+      evolution="continuous">
+
+    <!-- Entry point for massive data streams (logs, events, ALN blocks, etc.) -->
+    <ingestLayer id="aln.ingest">
+      <source type="stream" name="aln-core"/>
+      <source type="stream" name="game-telemetry"/>
+      <source type="stream" name="crypto-market-feeds"/>
+      <parser
+          id="aln.syntax.parser"
+          language="ALN"
+          mode="strict"
+          errorPolicy="route_to_errorBus"/>
+      <normalizer
+          id="event.normalizer"
+          outputFormat="hub.event.v1"
+          ensureUTF8="true"/>
+    </ingestLayer>
+
+    <!-- Central compliance wall: routes everything through Bit.Hub -->
+    <complianceWall id="bit.hub.wall-of-compliance">
+      <policySet id="global.base">
+        <policy name="utf8_validity"    action="repair_or_drop"/>
+        <policy name="sql_null_safety"  action="wrap_with_NullTypes"/>
+        <policy name="crypto_key_size"  action="enforce_ed25519_constants"/>
+        <policy name="personality_safety" action="filter_personality_output"/>
+      </policySet>
+
+      <router id="compliance.router">
+        <route match="error.type == 'UTF8_INVALID'"      to="handler.utf8.repair"/>
+        <route match="error.type == 'SQL_NULL_MISMATCH'" to="handler.sql.null"/>
+        <route match="error.type == 'ED25519_MISCONFIG'" to="handler.crypto.ed25519"/>
+        <route match="error.type == 'PERSONALITY_VIOLATION'" to="handler.personality.guard"/>
+        <defaultRoute to="handler.generic.log"/>
+      </router>
+    </complianceWall>
+
+    <!-- Error handlers (auto‑correction layer) -->
+    <handlers>
+
+      <!-- UTF‑8 repair using ToValidUTF8 semantics -->
+      <handler id="handler.utf8.repair" type="textNormalization">
+        <description>Repair invalid UTF‑8 sequences before further processing.</description>
+        <operation function="bytes.ToValidUTF8"
+                   fallbackReplacement="?"
+                   crossLanguageEquivalent="strings.ToValidUTF8"/>
+      </handler>
+
+      <!-- SQL null safety using NullInt32 / NullTime semantics -->
+      <handler id="handler.sql.null" type="dataShapeCorrection">
+        <description>Normalize DB input/output to nullable SQL structures.</description>
+        <mapping>
+          <fieldPattern source="*.int32"  targetWrapper="database/sql.NullInt32"/>
+          <fieldPattern source="*.time"   targetWrapper="database/sql.NullTime"/>
+        </mapping>
+      </handler>
+
+      <!-- Ed25519 constants / signature enforcement -->
+      <handler id="handler.crypto.ed25519" type="cryptoCorrection">
+        <description>Enforce Ed25519 key sizes and signature sizes before signing/verification.[web:64]</description>
+        <constraints
+            publicKeySizeBytes="32"
+            privateKeySizeBytes="64"
+            seedSizeBytes="32"
+            signatureSizeBytes="64"/>
+        <operations>
+          <operation name="GenerateKey"   api="crypto/ed25519.GenerateKey"/>
+          <operation name="NewKeyFromSeed" api="crypto/ed25519.NewKeyFromSeed"/>
+          <operation name="Sign"          api="crypto/ed25519.Sign"/>
+          <operation name="Verify"        api="crypto/ed25519.Verify"/>
+        </operations>
+      </handler>
+
+      <!-- Personality safety: binds Skittz‑Kraven to governance filters -->
+      <handler id="handler.personality.guard" type="personalityCompliance">
+        <bindPersonality idRef="artist.skittz_kraven"/>
+        <rules>
+          <rule id="limit_profanity" source="style.profanity_raw_level" max="0.20"/>
+          <rule id="ensure_friendly" source="moods.Friendly.intensity" min="0.60"/>
+          <rule id="cap_mania"       source="moods.Maniacal.intensity" max="0.90"/>
+        </rules>
+      </handler>
+
+      <!-- Generic logging for unclassified errors -->
+      <handler id="handler.generic.log" type="logging">
+        <description>Fallback logger for unclassified issues.</description>
+        <sink type="Decentralized.Data.Chronicle" channel="ERROR_BUS"/>
+      </handler>
+
+    </handlers>
+
+    <!-- Personality routing: connect Skittz Kraven to humor reasoning core -->
+    <personalityRouting id="routing.skittz_kraven">
+      <input personalityRef="artist.skittz_kraven"/>
+      <output hubCore="Humor-Reasoning-Core"/>
+      <constraintsRef wall="bit.hub.wall-of-compliance"/>
+    </personalityRouting>
+
+  </orchestrator>
+
+</strategyforge>

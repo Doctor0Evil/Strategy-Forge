@@ -1,0 +1,28 @@
+<did_binding_workflow
+    id="xrphone-bci-did-binding"
+    source_workflow="xrphone-bci-did-orchestrator"
+    safe="true"
+>
+    <binding_rules
+        eeg_hash_alg="SHA256"
+        eeg_window_seconds="10"
+        min_eeg_snr_db="12.00"
+        max_packet_loss_pct="2.50"
+        max_median_latency_ms="60.00"
+        require_tpm_attestation="true"
+        tpm_device="OPTIGA_SLB9665_TPM2.0"
+    />
+
+    <vc_profiles>
+        <profile id="session_access">
+            <vc_type>XRPhoneBCISessionAccess</vc_type>
+            <ttl_seconds>900</ttl_seconds>
+            <fields>eeg_snr_db,packet_loss_pct,median_latency_ms,compliance_profile</fields>
+        </profile>
+        <profile id="clinical_record_link">
+            <vc_type>XRPhoneBCIClinicalLink</vc_type>
+            <ttl_seconds>3600</ttl_seconds>
+            <fields>eeg_snr_db,board_model,xr_device_model,blood_type_id</fields>
+        </profile>
+    </vc_profiles>
+</did_binding_workflow>

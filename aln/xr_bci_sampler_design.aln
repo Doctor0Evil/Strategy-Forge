@@ -1,0 +1,109 @@
+<system.xr_bci_sampler
+    id="xr-bci-sampler-mt6883-galea"
+    version="1.0.0"
+    regulatory_profile="IEC62304:2015,ISO14971:2019,ISO10993:2018,GDPR,CCPA"
+    operating_modes="clinical,home_use,research"
+    security_profile="zero_trust,end_to_end_encryption,audit_logging,strict_immutability"
+>
+
+    <chipset_profile
+        model="MT6883_Dimensity_1000"
+        process_nm="7"
+        cpu_cores_big="4"
+        cpu_cores_little="4"
+        cpu_architecture_big="Cortex-A77"
+        cpu_architecture_little="Cortex-A55"
+        max_clock_ghz_big="2.6"
+        max_ram_gb="12"
+        gpu="Mali-G77"
+        connectivity="5G,WiFi6,Bluetooth5.1"
+    />
+
+    <headset_profile
+        model="Galea_Varjo_Aero"
+        eeg_channels="16"
+        emg_channels="4"
+        eog_channels="2"
+        ppg_channels="2"
+        eda_channels="1"
+        reference_scheme="driven_right_leg"
+        sampling_rate_hz="250"
+    />
+
+    <biodegradable_cybernetic_module
+        module_id="cranial-flex-pla-mg-001"
+        substrate_materials="PLA,PLGA"
+        conductive_traces="Mg,Zn,Fe,transient_polymer_composite"
+        encapsulation="silk_fibroin_hydrogel"
+        thickness_mm="0.35"
+        max_power_mW="5.0"
+        max_surface_temperature_c="40.0"
+        iso10993_5_cytotoxicity="pass"
+        iso10993_10_sensitization="pass"
+        degradation_half_life_days="30.0"
+        full_resorption_days="120.0"
+        immune_activation_score_max="0.20"
+    />
+
+    <neuromorphic_user_profile
+        interface_mode="read_only"
+        permitted_stimulation="none"
+        decoded_outputs="intent_vector_4d,gaze_vector_3d,engagement_index"
+        prohibited_actions="closed_loop_brain_stimulation,parameter_autotuning_without_clinical_approval"
+    />
+
+    <sampling_parameters
+        window_ms="1000"
+        overlap_ms="200"
+        sample_rate_hz="250"
+        max_latency_ms="60.0"
+        target_latency_ms="30.0"
+        max_packet_loss_pct="2.0"
+        min_snr_db="18.0"
+        target_snr_db="22.0"
+    />
+
+    <filter_bank
+        notch_line_noise_hz="50,60"
+        notch_q_factor="30.0"
+        bandpass_low_hz="1.0"
+        bandpass_high_hz="40.0"
+        bandpass_order="4"
+        bands="delta:1-4,theta:4-8,alpha:8-13,beta:13-30,gamma:30-40"
+    />
+
+    <safety_constraints
+        cpu_utilization_max_pct="55.0"
+        device_skin_temperature_max_c="40.0"
+        battery_depth_of_discharge_max_pct="80.0"
+        radio_tx_power_reduction_near_head="true"
+        emergency_shutdown_on_overtemp="true"
+    />
+
+    <pipeline
+        steps="timestamp_align,notch_filter,bandpass_filter,artifact_rejection,feature_extraction,metrics_export"
+    />
+
+    <step.id="timestamp_align">
+        <description>Align EEG/BCI samples to monotonic system clock; correct drift & jitter.</description>
+        <inputs>raw_eeg,raw_aux,hw_timestamps</inputs>
+        <outputs>aligned_eeg,aligned_aux,aligned_timestamps</outputs>
+        <constraints.max_drift_ms>5.0</constraints.max_drift_ms>
+    </step.id="timestamp_align">
+
+    <step.id="artifact_rejection">
+        <description>Reject or mark segments contaminated by EMG/EOG and motion.</description>
+        <inputs>aligned_eeg,emg,eog,imu</inputs>
+        <outputs>clean_eeg,artifact_mask</outputs>
+        <params.eeg_amp_threshold_uV>100.0</params.eeg_amp_threshold_uV>
+        <params.emg_band_hz>40.0..100.0</params.emg_band_hz>
+        <params.eog_corr_threshold>0.70</params.eog_corr_threshold>
+    </step.id="artifact_rejection">
+
+    <metrics_export
+        cadence_ms="1000"
+        metrics="snr_db,artifact_rate_pct,median_latency_ms,p99_latency_ms,packet_loss_pct"
+        destination="on_device_dashboard,enclave_storage,clinical_export"
+    />
+
+</system.xr_bci_sampler>

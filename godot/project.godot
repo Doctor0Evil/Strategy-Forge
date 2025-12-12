@@ -1,0 +1,13 @@
+[application]
+config/name="StrategyForge"
+config/features=PackedStringArray("4.2", "GL Compatibility")
+run/main_scene="res://scenes/main.tscn"
+
+[rendering]
+quality/driver/driver_name="GLES3"
+
+[autoload]
+JavaScriptBridge="*res://scripts/js_bridge_stub.gd"
+
+[export]
+# HTML5 export preset name referenced by export_presets.cfg

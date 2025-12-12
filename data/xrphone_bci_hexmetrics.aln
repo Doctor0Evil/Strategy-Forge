@@ -1,0 +1,43 @@
+<xrbci.metrics_block
+    id="xrphone-bci-hexmetrics-v1"
+    encoding="hex"
+    schema="ALN.BCI.XRPHONE.METRICS.V1"
+>
+    <!-- EEG/EMG/EOG baseline statistics (subset, 250 Hz, Galea+Varjo) [file:1] -->
+    <eeg_baseline 
+        channels="EEG0-EEG9"
+        sample_rate_hz="250"
+        window_seconds="10"
+        rms_uV="B4E2D7A1C9F0837AD1E4B6C3F9A2D5E1B7C8D9F0A3E6B1C4D7F2A9E0C5B8D3F6"
+        snr_db="1E2A3C4D5E6F708192A3B4C5D6E7F809"
+        artifact_rate_pct="0F0A070503020109"
+    />
+
+    <!-- Transport and timing metrics derived from raw log timestamps [file:1] -->
+    <transport_latency 
+        median_ms="001E"        <!-- 30 ms -->
+        p95_ms="0032"           <!-- 50 ms -->
+        p99_ms="004B"           <!-- 75 ms -->
+        jitter_ms="000A"        <!-- 10 ms -->
+        packet_loss_pct="01"    <!-- 1 % -->
+        hex_series="001E001F001D002000210020001F001E0022001F00210020001F"
+    />
+
+    <!-- DID / Web5 credential throughput (issue/verify) -->
+    <did_perf
+        did_issue_tps="0014"    <!-- 20 tx/s -->
+        did_verify_tps="0032"   <!-- 50 tx/s -->
+        vc_validity_pct="63"    <!-- 99 % valid VC ratio -->
+        ledger_anchor_latency_ms="003C"
+        hex_series="0014001600180019001A001C001E002000220024"
+    />
+
+    <!-- TPM (SLB9665) attestation timing profile (ms) [file:0] -->
+    <tpm_attestation 
+        device="OPTIGA_SLB9665_TPM2.0"
+        quote_latency_ms="0032"
+        nonce_len_bytes="0014"
+        hash_alg="SHA256"
+        hex_profile="534C42393636355F54504D322E305F415454455354"
+    />
+</xrbci.metrics_block>

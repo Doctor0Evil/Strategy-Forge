@@ -1,0 +1,14 @@
+{
+  "name": "strategyforge-socket-gateway",
+  "version": "0.1.0",
+  "private": true,
+  "main": "socket_gateway.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node socket_gateway.js"
+  },
+  "dependencies": {
+    "socket.io": "^4.7.2",
+    "zeromq": "^6.0.0"
+  }
+}

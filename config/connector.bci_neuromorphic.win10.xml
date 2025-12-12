@@ -1,0 +1,55 @@
+<deviceConnector
+    id="bci.neuromorphic.win10"
+    version="1.0"
+    platform="windows10"
+    security="C86_HARDWARE_ENFORCED">
+
+  <hardwareBinding>
+    <!-- PnP class: DiskDrive (used by many USB/neuromorphic dongles) -->
+    <pnpClassGuid>{4d36e967-e325-11ce-bfc1-08002be10318}</pnpClassGuid>
+    <instanceIdSuffix>\0002</instanceIdSuffix>
+
+    <!-- Example kernel device path observed on host -->
+    <kernelDevicePath>\Device\00000115</kernelDevicePath>
+
+    <!-- INF + install context (for audit only, no reinstallation here) -->
+    <infSource id="disk.inf">
+      <hash>6d166ee9677c725c</hash>
+      <section>disk_install.NT</section>
+      <osVersion>10.0.19041.4597</osVersion>
+      <label>GenDisk</label>
+    </infSource>
+
+    <capability id="CM_DEVCAP_UNIQUEID" value="true"/>
+  </hardwareBinding>
+
+  <channels>
+    <!-- Logical channels; payload is opaque, decrypted higher up -->
+    <channel id="signal.raw"      type="binary"   direction="in"/>
+    <channel id="signal.decoded"  type="float32"  direction="in"/>
+    <channel id="control.command" type="json"     direction="out"/>
+  </channels>
+
+  <security>
+    <requireUniqueId>true</requireUniqueId>
+    <transportEncryption>aes-gcm-256</transportEncryption>
+    <sessionAuth>ed25519-handshake</sessionAuth>
+    <policy>
+      <rule id="no_direct_fs_access" action="deny">
+        Connector must not expose raw filesystem read/write from this device
+        to game/UX layers.
+      </rule>
+      <rule id="bci_scope_limit" action="allow">
+        Only EEG/BCI‑related streams are allowed; storage‑like partitions
+        must remain hidden from Strategy‑Forge.
+      </rule>
+    </policy>
+  </security>
+
+  <mapping>
+    <!-- Map OS identity to Bit.Hub / ALN identities -->
+    <map key="hardware.uniqueId"  source="CM_DEVCAP_UNIQUEID"/>
+    <map key="hardware.pnpClass"  source="{4d36e967-e325-11ce-bfc1-08002be10318}"/>
+    <map key="hardware.kernelPath" source="\Device\00000115"/>
+  </mapping>
+</deviceConnector>

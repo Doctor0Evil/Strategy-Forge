@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-api
+  namespace: strategyforge
+  labels:
+    app: php-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: php-api
+  template:
+    metadata:
+      labels:
+        app: php-api
+    spec:
+      containers:
+        - name: php-fpm
+          image: registry.example.com/strategyforge/php-api:latest
+          env:
+            - name: REDIS_HOST
+              value: redis
+            - name: POSTGRES_HOST
+              value: postgres
+            - name: POSTGRES_DB
+              value: strategyforge
+            - name: POSTGRES_USER
+              value: strategyforge
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: password
+            - name: ZMQ_ENDPOINT
+              value: "tcp://socket-gateway:5557"
+            - name: GAME_CORS_ORIGIN
+              value: "https://strategyforge.example"
+            - name: DID_AUTH_ENABLED
+              value: "false"
+            - name: DID_URI
+              value: "did:ion:..."
+          ports:
+            - containerPort: 9000
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+        - name: nginx
+          image: registry.example.com/strategyforge/php-nginx:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: php-api
+  namespace: strategyforge
+spec:
+  selector:
+    app: php-api
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80

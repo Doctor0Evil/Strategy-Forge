@@ -1,0 +1,55 @@
+<!-- XR-Phone BCI Data Sampler Control (replaces dice roller) -->
+<button 
+  id="start_sampler"
+  onclick="startBciSampler()">
+  Start BCI Sampler
+</button>
+
+<button 
+  id="stop_sampler"
+  onclick="stopBciSampler()"
+  disabled>
+  Stop BCI Sampler
+</button>
+
+<span id="sampler_status">idle</span>
+<span id="eeg_snr">EEG SNR: -- dB</span>
+<span id="latency">Latency: -- ms</span>
+
+<script>
+  let samplerActive = false;
+
+  async function startBciSampler() {
+    if (samplerActive) return;
+    samplerActive = true;
+    document.getElementById('sampler_status').textContent = 'acquiring';
+    document.getElementById('start_sampler').disabled = true;
+    document.getElementById('stop_sampler').disabled = false;
+
+    // Call XR-phone native bridge (WebView / WebXR / JS bridge)
+    if (window.xrBciBridge && window.xrBciBridge.startSampling) {
+      await window.xrBciBridge.startSampling();
+    }
+  }
+
+  async function stopBciSampler() {
+    if (!samplerActive) return;
+    samplerActive = false;
+    document.getElementById('sampler_status').textContent = 'stopped';
+    document.getElementById('start_sampler').disabled = false;
+    document.getElementById('stop_sampler').disabled = true;
+
+    if (window.xrBciBridge && window.xrBciBridge.stopSampling) {
+      await window.xrBciBridge.stopSampling();
+    }
+  }
+
+  // Status updates from native BCI sampler
+  function onBciSamplerMetricsUpdate(metrics) {
+    document.getElementById('sampler_status').textContent = metrics.state;
+    document.getElementById('eeg_snr').textContent = 'EEG SNR: ' + metrics.eegSnrDb.toFixed(1) + ' dB';
+    document.getElementById('latency').textContent = 'Latency: ' + metrics.medianLatencyMs.toFixed(1) + ' ms';
+  }
+
+  window.onBciSamplerMetricsUpdate = onBciSamplerMetricsUpdate;
+</script>

@@ -1,0 +1,125 @@
+<fet_workflow 
+    id="xrphone-bci-did-orchestrator"
+    agent=".aananoswarm.bci_xrphone"
+    src="Galea-Varjo-Aero.txt"
+    mode="clinical_realtime"
+    scope="eeg,emg,eog,ppg,eda,did_credentials"
+    safe="true"
+    compliant="Bit.Hub,Perplexity.Labs,LegalBanannas,GDPR,CCPA,ISO13485,IEC62304"
+    iteration="continuous"
+    environments="mobile_xr,edge_gateway,web5_node"
+    containment="swarmnet-strict"
+>
+    <!-- Scope: biomedical streams + DID -->
+    <scope-definitions 
+        source="Scope-Definitions.aln" 
+        mode="clinical_realtime" 
+        safe="true"
+        channels="EEG0-EEG9,EMG0-EMG3,EOG0-EOG1,PPG0-PPG1,EDA0"
+        sampling_hz="250"
+        board_model="OpenBCI_Galea"
+        xr_device="Varjo_Aero"
+    />
+
+    <!-- Legal, privacy & non‑discrimination guardrail -->
+    <swarm-legalbanannas 
+        execute="evaluate(
+            legal:compliance_check &
+            privacy:gdpr_ccpa &
+            audit:log_all &
+            role:verify_user &
+            target:not_protected_group
+        )" 
+    />
+
+    <!-- Swarm mode: health + credential pipeline -->
+    <swarm_mode 
+        file="bci-xrphone-health-and-did.fet"
+        actions="signal_qc,audit,chain_revert,enable_rag_logging,aln_tool_restructure,distribute_permission,anchor_blockchain,did_vc_issue,did_vc_verify"
+        safety_resistance="max"
+        safe_iterations="16"
+        workflow_reconstruction="true"
+        environments="mobile_xr,edge_gateway,web5_node"
+        containment="swarmnet-strict"
+    />
+
+    <!-- Bit bot: continuous repo + model hygiene -->
+    <bit_bot 
+        link="bci-xrphone-health-and-did"
+        description="Continuously audit BCI/XR repos, revert faults, enable RAG logging, restructure tools, distribute permission, and anchor Web5 DID attestations to an auditable ledger."
+    />
+
+    <!-- Policy layer: strict, no unsafe neuro‑writeback -->
+    <policy_layer
+        policy="bci_xrphone_neuroread_only"
+        clearance="Ω-CLINICAL"
+        scan_depth="full_stack"
+        virtanet="enable_autonomous_node_orchestration"
+        auditlog="immutable,tamper_evident"
+        compliance_trigger="auto"
+        ai_agent_hook="read_only,sandboxed,safe"
+        signal_isolation="optical_isolator,air_gap,galvanic_barrier"
+        device_exclusion="ban_neural_writer,ban_non_compliant_ai,require_validation"
+        workflow="runtime_oversight,firewall_dev_layer,cryptosign_modules"
+        prohibited_value="unsafe_neurostimulation"
+        catastrophic_loop_mitigation="on_detect,safe_deactivation"
+        human_in_the_loop="audit_multi_party,signoff_crypto,escalate_halt"
+        legal_framework="standard,medical,privacy"
+        hardware_failsafe="deadman_switch_active,bci_signal_read_only"
+        neuro_symbolic_control="only_explainable,rule_constrained,mapped_outputs"
+        system_export="format,sign,notarize_blockchain"
+        bci_superban="active,block_interference,quarantine_unapproved_bci"
+        metaphysical_safety="lockdown_on_collapse,enforce_forensic_apportionment"
+        policy_gate="opa_bithub_enabled,spdx_scan"
+        compliancebot="monitor,instant_quarantine_on_anomaly"
+        quantumdatarouter="route_sanitize,block_legacy_protocols"
+    />
+
+    <!-- ALN compliance + CI for this node (no Python runtime used in production BCI path) -->
+    <script type="application/x-aln">
+    .zeta :: .aln-code.compliance({
+        git_sync_root: "Doctor0Evil/Bio-Aug",
+        branch: "main",
+        auth: env.GITHUB_TOKEN,
+        rust_version: "1.81.0",
+        kotlin_version: "2.0.0",
+        tpm_profile: "SLB9665_TPM2.0",
+        safe_dir: true,
+        static_analysis_tool: "cargo_clippy,kotlinc_lint"
+    })
+    :: web_element(fetch.event) -> {
+        try: bci_xrphone_event_handler(event),
+        except TimeoutError: swarm.safety.partial_result(event).contain()
+    }
+    :: enforce_autonomous(fetch.ai).sandboxed_secure()
+    </script>
+
+    <!-- Alliance Legal Compliance & Signal Integrity quiz -->
+    <aananoswarm.quiz_construct>
+        <parameters>
+            <mode>quiz</mode>
+            <topic>Alliance Legal Compliance, Signal Integrity & BCI/XR Safety</topic>
+            <questions>24</questions>
+            <style>infographic-research</style>
+            <return_embed>true</return_embed>
+            <callback>/compliance_workflow/visual_embed/bci_xrphone</callback>
+        </parameters>
+    </aananoswarm.quiz_construct>
+
+    <!-- Performance metrics export for dashboarding -->
+    <metrics_export
+        format="ALN_JSON"
+        destination="dashboards/xrphone_bci_perf.json"
+        fields="eeg_snr_db,packet_loss_pct,median_latency_ms,p99_latency_ms,artifact_rate_pct,did_issue_tps,did_verify_tps,vc_validity_pct"
+        cadence_ms="1000"
+        notarize="true"
+    />
+</fet_workflow>
+
+<.aananoswarm.bci_xrphone
+    scope="[1].Infinity" 
+    compliant="Bit.Hub,Perplexity.Labs,LegalBanannas,GDPR,CCPA,ISO13485,IEC62304"
+    mode="auto"
+    iteration="continuous"
+    repair='{"property_path":"scrollParent","action":"collaborative-effort","platform":"fetch.ai","url":"https://asi1.ai/collaborations"}'
+/>

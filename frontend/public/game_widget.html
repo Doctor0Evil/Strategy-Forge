@@ -16,6 +16,10 @@
     <!-- Tailwind (optional for widget-only styling; main app uses Vite-processed CSS) -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Query builder enhancements (accessible combobox + suggestions) -->
+    <link rel="stylesheet" href="/query_builder_enhanced.css" />
+    <script src="/query_builder_enhanced.js" defer></script>
+
     <style>
       body {
         margin: 0;
@@ -95,6 +99,7 @@
           const [units, setUnits] = useState({ miners: 0, drones: 0, turrets: 0 });
           const [faction, setFaction] = useState(null);
           const [log, setLog] = useState([]);
+          const [query, setQuery] = useState("");
 
           useEffect(() => {
             const gwUrl = window.STRATEGYFORGE_SOCKET_URL || "https://strategyforge.ai:8081";
@@ -143,30 +148,86 @@
             };
           }, []);
 
+          function runQuery(event) {
+            event.preventDefault();
+            if (!query.trim()) {
+              return;
+            }
+            // For now, just log the query; backend wiring can be added later.
+            setLog(prev => {
+              const next = [{ ts: Date.now(), message: "Query: " + query.trim() }, ...prev];
+              return next.slice(0, 50);
+            });
+          }
+
           return React.createElement(
             "div",
             { className: "w-full max-w-6xl mx-auto p-4" },
             React.createElement(
               "header",
-              { className: "flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4" },
+              { className: "flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4" },
               React.createElement(
                 "div",
-                null,
+                { className: "flex flex-col gap-1" },
                 React.createElement("h1", { className: "text-xl font-semibold text-cyan-300" }, "StrategyForge Command Center"),
-                React.createElement("p", { className: "text-xs text-slate-400" }, "RTS economy, factions, and tower defense bridge")
+                React.createElement("p", { className: "text-xs text-slate-400" }, "RTS economy, factions, tower defense, and ops query surface")
               ),
               React.createElement(
                 "div",
-                { className: "flex items-center gap-2 text-xs" },
-                React.createElement("span", { className: "uppercase tracking-wide text-slate-400" }, "Socket:"),
+                { className: "flex flex-col sm:flex-row sm:items-center gap-3 text-xs w-full sm:w-auto" },
                 React.createElement(
-                  "span",
-                  {
-                    className:
-                      "inline-flex items-center px-2 py-1 rounded-full " +
-                      (socketStatus === "connected" ? "bg-emerald-900/50 text-emerald-300" : "bg-rose-900/40 text-rose-300")
-                  },
-                  socketStatus
+                  "form",
+                  { className: "flex items-center gap-2", onSubmit: runQuery },
+                  React.createElement(
+                    "label",
+                    { htmlFor: "query-builder-test", className: "sr-only" },
+                    "Command / query"
+                  ),
+                  React.createElement("input", {
+                    id: "query-builder-test",
+                    name: "query-builder-test",
+                    value: query,
+                    autoComplete: "off",
+                    type: "text",
+                    role: "combobox",
+                    spellCheck: "false",
+                    "aria-expanded": "false",
+                    "aria-describedby": "query-builder-help",
+                    "data-target": "query-builder.input",
+                    "data-action":
+                      "input:query-builder#inputChange blur:query-builder#inputBlur keydown:query-builder#inputKeydown focus:query-builder#inputFocus",
+                    "data-view-component": "true",
+                    className: "FormControl-input QueryBuilder-Input FormControl-medium w-72 text-xs px-2 py-1 rounded border border-slate-700 bg-slate-900",
+                    "aria-controls": "query-builder-test-results",
+                    "aria-autocomplete": "list",
+                    "aria-haspopup": "listbox",
+                    onChange: e => setQuery(e.target.value)
+                  }),
+                  React.createElement(
+                    "button",
+                    {
+                      type: "submit",
+                      className:
+                        "inline-flex items-center px-2 py-1 rounded bg-emerald-700 hover:bg-emerald-600 text-white"
+                    },
+                    "Run"
+                  )
+                ),
+                React.createElement(
+                  "div",
+                  { className: "flex items-center gap-2" },
+                  React.createElement("span", { className: "uppercase tracking-wide text-slate-400" }, "Socket:"),
+                  React.createElement(
+                    "span",
+                    {
+                      className:
+                        "inline-flex items-center px-2 py-1 rounded-full " +
+                        (socketStatus === "connected"
+                          ? "bg-emerald-900/50 text-emerald-300"
+                          : "bg-rose-900/40 text-rose-300")
+                    },
+                    socketStatus
+                  )
                 )
               )
             ),

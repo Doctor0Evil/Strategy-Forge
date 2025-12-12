@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- StrategyForge Command Center widget (standalone, Vite-coexisting) -->
+    <meta charset="UTF-8" />
+    <title>StrategyForge Command Center</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- React + ReactDOM CDN (kept independent from Vite bundle) -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <!-- Socket.IO CDN -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js" integrity="sha384-Hl7LqsB26oV4kSZc7Usm8E+z7M8nxR9y/x0xvGXr+g1GgXtvxG7moAKL3Bq1hKUv" crossorigin="anonymous"></script>
+
+    <!-- Tailwind (optional for widget-only styling; main app uses Vite-processed CSS) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      body {
+        margin: 0;
+        background-color: #020617;
+        color: #e5e7eb;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      #root {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      #godot-container {
+        width: 100%;
+        height: 480px;
+        background: radial-gradient(circle at center, #020617 0, #000000 60%);
+        border-radius: 0.75rem;
+        border: 1px solid #1f2937;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- Godot HTML5 bridge placeholder container -->
+    <div id="godot-container" class="mt-4"></div>
+
+    <!--
+      README (widget–Godot bridge note):
+
+      The Godot HTML5 export is expected to produce:
+
+        - godot/dist/game_scene.html
+        - godot/dist/game_scene.pck
+        - godot/dist/godot_engine.js
+
+      In production, these can be:
+
+        - Copied into the NGINX document root (e.g. /usr/share/nginx/html/godot/dist/)
+        - Or served from a dedicated static bucket / CDN.
+
+      The browser-side initialization pattern (example):
+
+        <script src="/godot/dist/godot_engine.js"></script>
+        <script>
+          // Example options; keep consistent with Godot 4 HTML export preset.
+          const canvasContainer = document.getElementById("godot-container");
+          const engine = new Engine(
+            "/godot/dist/game_scene.html",
+            {
+              canvasResizePolicy: 2, // keep aspect
+              experimentalVK: false,
+              focusCanvas: true
+            }
+          );
+          engine.startGame().then(() => {
+            console.log("Godot game loaded into #godot-container");
+          });
+        </script>
+
+      The JavaScriptBridge inside the Godot project will call:
+        JavaScriptBridge.call("updateGameState", JSON.stringify({...}));
+
+      The React widget and /api/v1/game responses must consume/produce a JSON shape
+      with resources { ore, energy, credits } and units { miners, drones, turrets }.
+    -->
+
+    <script>
+      (function () {
+        const { useEffect, useState } = React;
+
+        function CommandCenterWidget() {
+          const [socketStatus, setSocketStatus] = useState("disconnected");
+          const [leaderboard, setLeaderboard] = useState([]);
+          const [resources, setResources] = useState({ ore: 0, energy: 0, credits: 0 });
+          const [units, setUnits] = useState({ miners: 0, drones: 0, turrets: 0 });
+          const [faction, setFaction] = useState(null);
+          const [log, setLog] = useState([]);
+
+          useEffect(() => {
+            const gwUrl = window.STRATEGYFORGE_SOCKET_URL || "https://strategyforge.ai:8081";
+            const s = io(gwUrl, {
+              transports: ["websocket"],
+              withCredentials: true
+            });
+
+            s.on("connect", () => setSocketStatus("connected"));
+            s.on("disconnect", () => setSocketStatus("disconnected"));
+
+            s.on("leaderboard_update", payload => {
+              setLeaderboard(payload.leaderboard || []);
+              appendLog("Leaderboard updated");
+            });
+            s.on("resource_update", payload => {
+              if (payload.resources) setResources(payload.resources);
+              if (payload.units) setUnits(payload.units);
+              appendLog("Resources updated");
+            });
+            s.on("alliance_update", () => appendLog("Alliance state updated"));
+            s.on("auction_update", () => appendLog("Auction updated"));
+
+            window.updateGameState = function (stateJson) {
+              try {
+                const parsed = typeof stateJson === "string" ? JSON.parse(stateJson) : stateJson;
+                if (parsed.resources) setResources(parsed.resources);
+                if (parsed.units) setUnits(parsed.units);
+                if (parsed.faction) setFaction(parsed.faction);
+                appendLog("Godot state sync");
+              } catch (e) {
+                console.error("Invalid Godot state payload", e);
+              }
+            };
+
+            function appendLog(message) {
+              setLog(prev => {
+                const next = [{ ts: Date.now(), message }, ...prev];
+                return next.slice(0, 50);
+              });
+            }
+
+            return () => {
+              s.disconnect();
+              delete window.updateGameState;
+            };
+          }, []);
+
+          return React.createElement(
+            "div",
+            { className: "w-full max-w-6xl mx-auto p-4" },
+            React.createElement(
+              "header",
+              { className: "flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4" },
+              React.createElement(
+                "div",
+                null,
+                React.createElement("h1", { className: "text-xl font-semibold text-cyan-300" }, "StrategyForge Command Center"),
+                React.createElement("p", { className: "text-xs text-slate-400" }, "RTS economy, factions, and tower defense bridge")
+              ),
+              React.createElement(
+                "div",
+                { className: "flex items-center gap-2 text-xs" },
+                React.createElement("span", { className: "uppercase tracking-wide text-slate-400" }, "Socket:"),
+                React.createElement(
+                  "span",
+                  {
+                    className:
+                      "inline-flex items-center px-2 py-1 rounded-full " +
+                      (socketStatus === "connected" ? "bg-emerald-900/50 text-emerald-300" : "bg-rose-900/40 text-rose-300")
+                  },
+                  socketStatus
+                )
+              )
+            ),
+            React.createElement(
+              "main",
+              { className: "grid grid-cols-1 xl:grid-cols-3 gap-4" },
+              React.createElement(
+                "section",
+                { className: "xl:col-span-2 space-y-4" },
+                React.createElement(
+                  "div",
+                  { className: "bg-slate-900/70 border border-slate-700 rounded-xl p-3" },
+                  React.createElement(
+                    "h2",
+                    { className: "text-sm font-semibold text-slate-200 mb-2" },
+                    "RTS State"
+                  ),
+                  React.createElement(
+                    "div",
+                    { className: "grid grid-cols-2 gap-3 text-xs" },
+                    React.createElement(
+                      "div",
+                      null,
+                      React.createElement("h3", { className: "font-semibold text-cyan-300 mb-1" }, "Resources"),
+                      React.createElement(
+                        "ul",
+                        { className: "space-y-0.5" },
+                        React.createElement("li", null, "Ore: ", resources.ore),
+                        React.createElement("li", null, "Energy: ", resources.energy),
+                        React.createElement("li", null, "Credits: ", resources.credits)
+                      )
+                    ),
+                    React.createElement(
+                      "div",
+                      null,
+                      React.createElement("h3", { className: "font-semibold text-amber-300 mb-1" }, "Units"),
+                      React.createElement(
+                        "ul",
+                        { className: "space-y-0.5" },
+                        React.createElement("li", null, "Miners: ", units.miners),
+                        React.createElement("li", null, "Drones: ", units.drones),
+                        React.createElement("li", null, "Turrets: ", units.turrets)
+                      )
+                    )
+                  ),
+                  React.createElement(
+                    "div",
+                    { className: "mt-3 text-xs text-slate-400" },
+                    "Faction: ",
+                    faction || "Unassigned"
+                  )
+                ),
+                React.createElement(
+                  "div",
+                  { className: "bg-slate-900/70 border border-slate-700 rounded-xl p-3" },
+                  React.createElement(
+                    "h2",
+                    { className: "text-sm font-semibold text-slate-200 mb-2" },
+                    "Godot Tower Defense"
+                  ),
+                  React.createElement(
+                    "p",
+                    { className: "text-xs text-slate-400 mb-2" },
+                    "The HTML5-exported Godot scene renders into the container below and periodically reports ore, energy, credits and unit tallies back via JavaScriptBridge."
+                  ),
+                  React.createElement(
+                    "p",
+                    { className: "text-xs text-slate-500" },
+                    "Ensure godot_engine.js and game_scene.html are deployed and bound to #godot-container in production."
+                  )
+                )
+              ),
+              React.createElement(
+                "section",
+                { className: "space-y-4" },
+                React.createElement(
+                  "div",
+                  { className: "bg-slate-900/70 border border-slate-700 rounded-xl p-3" },
+                  React.createElement(
+                    "h2",
+                    { className: "text-sm font-semibold text-slate-200 mb-2" },
+                    "Leaderboard"
+                  ),
+                  React.createElement(
+                    "ul",
+                    { className: "space-y-1 text-xs" },
+                    leaderboard.length === 0
+                      ? React.createElement("li", { className: "text-slate-500" }, "No entries yet")
+                      : leaderboard.map((row, idx) =>
+                          React.createElement(
+                            "li",
+                            { key: row.user_id || idx, className: "flex justify-between" },
+                            React.createElement("span", null, row.user_id || "unknown"),
+                            React.createElement("span", { className: "text-emerald-300" }, row.credits || 0)
+                          )
+                        )
+                  )
+                ),
+                React.createElement(
+                  "div",
+                  { className: "bg-slate-900/70 border border-slate-700 rounded-xl p-3 max-h-64 overflow-auto" },
+                  React.createElement(
+                    "h2",
+                    { className: "text-sm font-semibold text-slate-200 mb-2" },
+                    "Event Log"
+                  ),
+                  React.createElement(
+                    "ul",
+                    { className: "space-y-0.5 text-[11px]" },
+                    log.map(entry =>
+                      React.createElement(
+                        "li",
+                        { key: entry.ts },
+                        new Date(entry.ts).toISOString(),
+                        " – ",
+                        entry.message
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(React.createElement(CommandCenterWidget));
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: socket-gateway
+  namespace: strategyforge
+  labels:
+    app: socket-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: socket-gateway
+  template:
+    metadata:
+      labels:
+        app: socket-gateway
+    spec:
+      containers:
+        - name: gateway
+          image: registry.example.com/strategyforge/socket-gateway:latest
+          env:
+            - name: ZMQ_ENDPOINT
+              value: "tcp://php-api:5557"
+            - name: SOCKET_PORT
+              value: "8081"
+            - name: GAME_CORS_ORIGIN
+              value: "https://strategyforge.example"
+          ports:
+            - containerPort: 8081
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: socket-gateway
+  namespace: strategyforge
+spec:
+  selector:
+    app: socket-gateway
+  ports:
+    - name: ws
+      port: 8081
+      targetPort: 8081
